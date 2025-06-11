@@ -42,7 +42,32 @@
 
 :Annexe a owl:Class ;
     rdfs:label "Annexe" ;
-    rdfs:comment "Annexe jointe au rapport (images, spectres, profils, tableaux, etc.)." .
+    rdfs:comment """
+        Annexe jointe au rapport. Elle peut contenir plusieurs ressources multimédia (images, spectres, profils, tableaux…).
+        Chaque ressource peut avoir une description et des métadonnées spécifiques.
+    """ .
+
+:RessourceMultimedia a owl:Class ;
+    rdfs:label "Ressource multimédia" ;
+    rdfs:comment "Image, spectre, profil, ou autre ressource visuelle incluse dans une annexe." .
+
+:annexeContient a owl:ObjectProperty ;
+    rdfs:label "contient ressource" ;
+    rdfs:domain :Annexe ;
+    rdfs:range :RessourceMultimedia ;
+    rdfs:comment "Lien entre une annexe et les ressources multimédias qu’elle contient." .
+
+:descriptionRessource a owl:DatatypeProperty ;
+    rdfs:label "description de la ressource" ;
+    rdfs:domain :RessourceMultimedia ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Brève description du contenu de la ressource (ex. : 'Spectre UV à 250nm')." .
+
+:metadataRessource a owl:DatatypeProperty ;
+    rdfs:label "métadonnées de la ressource" ;
+    rdfs:domain :RessourceMultimedia ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Métadonnées techniques de la ressource (format, taille, dimensions, etc.)." 
 
 :Responsable a owl:Class ;
     rdfs:label "Responsable" ;
