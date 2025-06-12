@@ -18,162 +18,7 @@
 
 :ObjetAnalyse a owl:Class ;
     rdfs:label "Objet analysé" ;
-    rdfs:comment "Objet soumis à l’analyse (peut être matériel ou information). Utile aussi pour les devis ou fiches." .
-
-:ProgrammeAnalyse a owl:Class ;
-    rdfs:label "Programme d’analyse" ;
-    rdfs:comment "Méthodologie ou protocole utilisé lors de l’analyse." .
-
-:ParametreAnalytique a owl:Class ;
-    rdfs:label "Paramètre analytique" ;
-    rdfs:comment "Paramètre (température, durée, etc.) contrôlé pendant l’analyse." .
-
-:Resultat a owl:Class ;
-    rdfs:label "Résultat" ;
-    rdfs:comment "Résultat de l’analyse (texte, tableau, graphe, etc.)." .
-
-:Conclusion a owl:Class ;
-    rdfs:label "Conclusion" ;
-    rdfs:comment "Conclusion écrite tirée de l’analyse." .
-
-:Livrable a owl:Class ;
-    rdfs:label "Livrable" ;
-    rdfs:comment "Livrable résultant de l’analyse (rapport final, présentation PPT, etc.)." .
-
-:Annexe a owl:Class ;
-    rdfs:label "Annexe" ;
-    rdfs:comment """
-        Annexe jointe au rapport. Elle peut contenir plusieurs ressources multimédia (images, spectres, profils, tableaux…).
-        Chaque ressource peut avoir une description et des métadonnées spécifiques.
-    """ .
-
-:RessourceMultimedia a owl:Class ;
-    rdfs:label "Ressource multimédia" ;
-    rdfs:comment "Image, spectre, profil, ou autre ressource visuelle incluse dans une annexe." .
-
-:annexeContient a owl:ObjectProperty ;
-    rdfs:label "contient ressource" ;
-    rdfs:domain :Annexe ;
-    rdfs:range :RessourceMultimedia ;
-    rdfs:comment "Lien entre une annexe et les ressources multimédias qu’elle contient." .
-
-:descriptionRessource a owl:DatatypeProperty ;
-    rdfs:label "description de la ressource" ;
-    rdfs:domain :RessourceMultimedia ;
-    rdfs:range xsd:string ;
-    rdfs:comment "Brève description du contenu de la ressource (ex. : 'Spectre UV à 250nm')." .
-
-:metadataRessource a owl:DatatypeProperty ;
-    rdfs:label "métadonnées de la ressource" ;
-    rdfs:domain :RessourceMultimedia ;
-    rdfs:range xsd:string ;
-    rdfs:comment "Métadonnées techniques de la ressource (format, taille, dimensions, etc.)." 
-
-:Responsable a owl:Class ;
-    rdfs:label "Responsable" ;
-    rdfs:comment "Personne responsable ou auteur du rapport." .
-
-:rapportInclutEchantillon a owl:ObjectProperty ;
-    rdfs:label "inclut échantillon" ;
-    rdfs:domain :RapportAnalyse ;
-    rdfs:range :Echantillon ;
-    rdfs:comment "Le rapport d’analyse inclut l’échantillon analysé." .
-
-:rapportInclutObjet a owl:ObjectProperty ;
-    rdfs:label "inclut objet" ;
-    rdfs:domain :RapportAnalyse ;
-    rdfs:range :ObjetAnalyse ;
-    rdfs:comment "Le rapport d’analyse décrit l’objet analysé." .
-
-:rapportAPourProgramme a owl:ObjectProperty ;
-    rdfs:label "a pour programme" ;
-    rdfs:domain :RapportAnalyse ;
-    rdfs:range :ProgrammeAnalyse ;
-    rdfs:comment "Le rapport d’analyse spécifie le protocole ou programme de test." .
-
-:rapportInclutParametre a owl:ObjectProperty ;
-    rdfs:label "inclut paramètre" ;
-    rdfs:domain :RapportAnalyse ;
-    rdfs:range :ParametreAnalytique ;
-    rdfs:comment "Le rapport d’analyse mentionne un paramètre mesuré." .
-
-:rapportProduitResultat a owl:ObjectProperty ;
-    rdfs:label "produit résultat" ;
-    rdfs:domain :RapportAnalyse ;
-    rdfs:range :Resultat ;
-    rdfs:comment "Le rapport d’analyse produit un résultat final." .
-
-:rapportInclutConclusion a owl:ObjectProperty ;
-    rdfs:label "inclut conclusion" ;
-    rdfs:domain :RapportAnalyse ;
-    rdfs:range :Conclusion ;
-    rdfs:comment "Le rapport d’analyse se termine par une conclusion." .
-
-:rapportInclutLivrable a owl:ObjectProperty ;
-    rdfs:label "inclut livrable" ;
-    rdfs:domain :RapportAnalyse ;
-    rdfs:range :Livrable ;
-    rdfs:comment "Le rapport d’analyse génère un livrable (ex. PPT)." .
-
-:rapportInclutAnnexe a owl:ObjectProperty ;
-    rdfs:label "inclut annexe" ;
-    rdfs:domain :RapportAnalyse ;
-    rdfs:range :Annexe ;
-    rdfs:comment "Le rapport d’analyse peut joindre des annexes (images, spectres…)." .
-
-:rapportRedigePar a owl:ObjectProperty ;
-    rdfs:label "rédigé par" ;
-    rdfs:domain :RapportAnalyse ;
-    rdfs:range :Responsable ;
-    rdfs:comment "Le rapport d’analyse est rédigé par un responsable." .
-
-:dateAnalyse a owl:DatatypeProperty ;
-    rdfs:label "date d’analyse" ;
-    rdfs:domain :Echantillon ;
-    rdfs:range xsd:dateTime ;
-    rdfs:comment "Date à laquelle l’échantillon a été analysé." .
-
-:referenceEchantillon a owl:DatatypeProperty ;
-    rdfs:label "référence échantillon" ;
-    rdfs:domain :Echantillon ;
-    rdfs:range xsd:string ;
-    rdfs:comment "Référence ou numéro de série de l’échantillon." .
-
-:photoObjet a owl:DatatypeProperty ;
-    rdfs:label "photo objet" ;
-    rdfs:domain :ObjetAnalyse ;
-    rdfs:range xsd:anyURI ;
-    rdfs:comment "Image ou photo de l’objet analysé." .
-
-:temperatureParam a owl:DatatypeProperty ;
-    rdfs:label "température paramètre" ;
-    rdfs:domain :ParametreAnalytique ;
-    rdfs:range xsd:decimal ;
-    rdfs:comment "Valeur de température utilisée comme paramètre d’analyse." .
-
-:dateLivrable a owl:DatatypeProperty ;
-    rdfs:label "date livrable" ;
-    rdfs:domain :Livrable ;
-    rdfs:range xsd:dateTime ;
-    rdfs:comment "Date de génération du livrable (ex. date du PPT)." .
-
-@prefix : <http://data.serma.org/ontoserma#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-
-:RapportAnalyse a owl:Class ;
-    rdfs:label "Rapport d’analyse" ;
-    rdfs:subClassOf :DocumentMetier ;
-    rdfs:comment "Document qui synthétise les résultats d’analyses techniques." .
-
-:Echantillon a owl:Class ;
-    rdfs:label "Échantillon" ;
-    rdfs:comment "Échantillon analysé (avec date d’analyse, référence, etc.)." .
-
-:ObjetAnalyse a owl:Class ;
-    rdfs:label "Objet analysé" ;
-    rdfs:comment "Objet soumis à l’analyse (matériel ou information)." .
+    rdfs:comment "Objet soumis à l’analyse (matériel ou information). Utile aussi pour les devis ou fiches." .
 
 :ProgrammeAnalyse a owl:Class ;
     rdfs:label "Programme d’analyse" ;
@@ -207,7 +52,6 @@
     rdfs:label "Responsable" ;
     rdfs:comment "Personne responsable ou auteur du rapport." .
 
-# Relations structurelles
 :rapportInclutEchantillon a owl:ObjectProperty ;
     rdfs:domain :RapportAnalyse ; rdfs:range :Echantillon ;
     rdfs:label "inclut échantillon" ;
@@ -258,7 +102,6 @@
     rdfs:label "contient ressource" ;
     rdfs:comment "Lien entre une annexe et ses ressources multimédias." .
 
-# Données des propriétés
 :dateAnalyse a owl:DatatypeProperty ;
     rdfs:domain :Echantillon ; rdfs:range xsd:dateTime ;
     rdfs:label "date d’analyse" .
@@ -350,6 +193,7 @@
 :metadataRessource a owl:DatatypeProperty ;
     rdfs:domain :RessourceMultimedia ; rdfs:range xsd:string ;
     rdfs:label "métadonnées de la ressource" .
+
 
 
 :Devis a owl:Class ;
