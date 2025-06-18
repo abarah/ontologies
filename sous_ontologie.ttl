@@ -1,0 +1,131 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix serma: <http://data.serma.org/ontoserma#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+serma:commentaireEchantillon a owl:DatatypeProperty ;
+    rdfs:label "commentaire échantillon" ;
+    rdfs:domain serma:Echantillon ;
+    rdfs:range xsd:string .
+
+serma:conditionsAnalytiques a owl:DatatypeProperty ;
+    rdfs:label "conditions analytiques" ;
+    rdfs:domain serma:Resultat ;
+    rdfs:range xsd:string .
+
+serma:dateAnalyse a owl:DatatypeProperty ;
+    rdfs:label "date d’analyse" ;
+    rdfs:domain serma:Echantillon ;
+    rdfs:range xsd:dateTime .
+
+serma:dateReception a owl:DatatypeProperty ;
+    rdfs:label "date de réception" ;
+    rdfs:domain serma:Echantillon ;
+    rdfs:range xsd:dateTime .
+
+serma:grapheResultat a owl:DatatypeProperty ;
+    rdfs:label "graphe résultat" ;
+    rdfs:domain serma:Resultat ;
+    rdfs:range xsd:anyURI .
+
+serma:rapportAPourProgramme a owl:ObjectProperty ;
+    rdfs:label "a pour programme" ;
+    rdfs:comment "Lien vers le programme ou protocole d’analyse." ;
+    rdfs:domain serma:RapportAnalyse ;
+    rdfs:range serma:ProgrammeAnalyse .
+
+serma:rapportInclutAnnexe a owl:ObjectProperty ;
+    rdfs:label "inclut annexe" ;
+    rdfs:comment "Lien vers les annexes du rapport." ;
+    rdfs:domain serma:RapportAnalyse ;
+    rdfs:range serma:Annexe .
+
+serma:rapportInclutConclusion a owl:ObjectProperty ;
+    rdfs:label "inclut conclusion" ;
+    rdfs:comment "Lien vers la conclusion du rapport." ;
+    rdfs:domain serma:RapportAnalyse ;
+    rdfs:range serma:Conclusion .
+
+serma:rapportInclutEchantillon a owl:ObjectProperty ;
+    rdfs:label "inclut échantillon" ;
+    rdfs:comment "Lien entre un rapport et un échantillon analysé." ;
+    rdfs:domain serma:RapportAnalyse ;
+    rdfs:range serma:Echantillon .
+
+serma:rapportInclutLivrable a owl:ObjectProperty ;
+    rdfs:label "inclut livrable" ;
+    rdfs:comment "Lien vers un livrable associé (ex. PPT)." ;
+    rdfs:domain serma:RapportAnalyse ;
+    rdfs:range serma:Livrable .
+
+serma:rapportInclutObjet a owl:ObjectProperty ;
+    rdfs:label "inclut objet" ;
+    rdfs:comment "Lien entre un rapport et l’objet analysé." ;
+    rdfs:domain serma:RapportAnalyse ;
+    rdfs:range serma:ObjetAnalyse .
+
+serma:rapportInclutParametre a owl:ObjectProperty ;
+    rdfs:label "inclut paramètre" ;
+    rdfs:comment "Lien vers les paramètres utilisés lors de l’analyse." ;
+    rdfs:domain serma:RapportAnalyse ;
+    rdfs:range serma:ParametreAnalytique .
+
+serma:rapportProduitResultat a owl:ObjectProperty ;
+    rdfs:label "produit résultat" ;
+    rdfs:comment "Lien entre un rapport et les résultats générés." ;
+    rdfs:domain serma:RapportAnalyse ;
+    rdfs:range serma:Resultat .
+
+serma:rapportRedigePar a owl:ObjectProperty ;
+    rdfs:label "rédigé par" ;
+    rdfs:comment "Lien entre le rapport et son auteur/responsable." ;
+    rdfs:domain serma:RapportAnalyse ;
+    rdfs:range serma:Responsable .
+
+serma:referenceEchantillon a owl:DatatypeProperty ;
+    rdfs:label "référence échantillon" ;
+    rdfs:domain serma:Echantillon ;
+    rdfs:range xsd:string .
+
+serma:schemaConclusion a owl:DatatypeProperty ;
+    rdfs:label "schéma conclusion" ;
+    rdfs:domain serma:Conclusion ;
+    rdfs:range xsd:anyURI .
+
+serma:tableauConclusion a owl:DatatypeProperty ;
+    rdfs:label "tableau conclusion" ;
+    rdfs:domain serma:Conclusion ;
+    rdfs:range xsd:string .
+
+serma:tableauResultat a owl:DatatypeProperty ;
+    rdfs:label "tableau résultat" ;
+    rdfs:domain serma:Resultat ;
+    rdfs:range xsd:string .
+
+serma:texteConclusion a owl:DatatypeProperty ;
+    rdfs:label "texte conclusion" ;
+    rdfs:domain serma:Conclusion ;
+    rdfs:range xsd:string .
+
+serma:texteResultat a owl:DatatypeProperty ;
+    rdfs:label "texte résultat" ;
+    rdfs:domain serma:Resultat ;
+    rdfs:range xsd:string .
+
+serma:Conclusion a owl:Class ;
+    rdfs:label "Conclusion" ;
+    rdfs:comment "Conclusion écrite tirée de l’analyse." .
+
+serma:Echantillon a owl:Class ;
+    rdfs:label "Échantillon" ;
+    rdfs:comment "Échantillon analysé (avec date d’analyse, référence, etc.)." .
+
+serma:Resultat a owl:Class ;
+    rdfs:label "Résultat" ;
+    rdfs:comment "Résultat de l’analyse (texte, tableau, graphe, etc.)." .
+
+serma:RapportAnalyse a owl:Class ;
+    rdfs:label "Rapport d’analyse" ;
+    rdfs:comment "Document qui synthétise les résultats d’analyses techniques." ;
+    rdfs:subClassOf serma:DocumentMetier .
+
