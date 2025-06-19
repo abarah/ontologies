@@ -65,7 +65,7 @@ serma:rapportInclutObjet a owl:ObjectProperty ;
     rdfs:range serma:ObjetAnalyse .
 
 serma:textObjet a owl:DatatypeProperty ;
-    rdfs:label "sujet objet" ;
+    rdfs:label "text objet" ;
     rdfs:domain serma:ObjetAnalyse ;
     rdfs:range xsd:string .
 
