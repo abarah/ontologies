@@ -64,6 +64,11 @@ serma:rapportInclutObjet a owl:ObjectProperty ;
     rdfs:domain serma:RapportAnalyse ;
     rdfs:range serma:ObjetAnalyse .
 
+serma:textObjet a owl:DatatypeProperty ;
+    rdfs:label "sujet objet" ;
+    rdfs:domain serma:ObjetAnalyse ;
+    rdfs:range xsd:string .
+
 serma:rapportInclutParametre a owl:ObjectProperty ;
     rdfs:label "inclut paramètre" ;
     rdfs:comment "Lien vers les paramètres utilisés lors de l’analyse." ;
