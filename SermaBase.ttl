@@ -107,9 +107,8 @@
     rdfs:label "date d’analyse" .
 
 :textObjet a owl:DatatypeProperty ;
-    rdfs:label "text objet" ;
-    rdfs:domain :ObjetAnalyse ;
-    rdfs:range xsd:string .
+    rdfs:domain :ObjetAnalyse ;rdfs:range xsd:string ;
+    rdfs:label "text objet" .
 
 :dateReception a owl:DatatypeProperty ;
     rdfs:domain :Echantillon ; rdfs:range xsd:dateTime ;
