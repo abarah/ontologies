@@ -108,7 +108,7 @@
 
 :textObjet a owl:DatatypeProperty ;
     rdfs:label "text objet" ;
-    rdfs:domain serma:ObjetAnalyse ;
+    rdfs:domain :ObjetAnalyse ;
     rdfs:range xsd:string .
 
 :dateReception a owl:DatatypeProperty ;
