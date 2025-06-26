@@ -3,6 +3,15 @@
 @prefix serma: <http://data.serma.org/ontoserma#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+serma:DocumentMetier a owl:Class ;
+    rdfs:label "Document métier" ;
+    rdfs:comment "Classe générale représentant n’importe quel document interne du groupe Serma." .
+
+serma:RapportAnalyse a owl:Class ;
+    rdfs:label "Rapport d’analyse" ;
+    rdfs:subClassOf :DocumentMetier ;
+    rdfs:comment "Document qui synthétise les résultats d’analyses techniques." .
+
 serma:commentaireEchantillon a owl:DatatypeProperty ;
     rdfs:label "commentaire échantillon" ;
     rdfs:domain serma:Echantillon ;
