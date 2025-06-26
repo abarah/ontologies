@@ -9,7 +9,7 @@ serma:DocumentMetier a owl:Class ;
 
 serma:RapportAnalyse a owl:Class ;
     rdfs:label "Rapport d’analyse" ;
-    rdfs:subClassOf :DocumentMetier ;
+    rdfs:subClassOf serma:DocumentMetier ;
     rdfs:comment "Document qui synthétise les résultats d’analyses techniques." .
 
 serma:commentaireEchantillon a owl:DatatypeProperty ;
