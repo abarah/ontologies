@@ -154,9 +154,9 @@
     rdfs:domain :Resultat ; rdfs:range xsd:string ;
     rdfs:label "tableau résultat" .
 
-:descriptiongrapheResultat a owl:DatatypeProperty ;
+:descriptionfichiersResultat a owl:DatatypeProperty ;
     rdfs:domain :Resultat ; rdfs:range xsd:anyURI ;
-    rdfs:label "description graphe résultat" .
+    rdfs:label "description fichiers résultat" .
 
 :texteConclusion a owl:DatatypeProperty ;
     rdfs:domain :Conclusion ; rdfs:range xsd:string ;
