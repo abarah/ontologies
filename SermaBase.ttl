@@ -47,7 +47,9 @@
 :RessourceMultimedia a owl:Class ;
     rdfs:label "Ressource multimédia" ;
     rdfs:comment "Image, spectre, profil, ou ressource visuelle contenue dans une annexe." .
-
+:RessourceMultimediaResultat a owl:Class ;
+    rdfs:label "RessourceMultimedia Resultat" ;
+    rdfs:comment "Image, spectre, profil, ou ressource visuelle contenue dans résulat." 
 :Responsable a owl:Class ;
     rdfs:label "Responsable" ;
     rdfs:comment "Personne responsable ou auteur du rapport." .
@@ -101,6 +103,10 @@
     rdfs:domain :Annexe ; rdfs:range :RessourceMultimedia ;
     rdfs:label "contient ressource" ;
     rdfs:comment "Lien entre une annexe et ses ressources multimédias." .
+:annexeContient a owl:ObjectProperty ;
+    rdfs:domain :Resultat ; rdfs:range :RessourceMultimediaResultat ;
+    rdfs:label "contient ressource" ;
+    rdfs:comment "Lien entre résultat  et ses ressources multimédias." .
 
 :dateAnalyse a owl:DatatypeProperty ;
     rdfs:domain :Echantillon ; rdfs:range xsd:dateTime ;
@@ -186,9 +192,9 @@
     rdfs:domain :RessourceMultimedia ; rdfs:range xsd:string ;
     rdfs:label "text de la ressource multimediae" .
 
-:metadataRessource a owl:DatatypeProperty ;
-    rdfs:domain :RessourceMultimedia ; rdfs:range xsd:string ;
-    rdfs:label "métadonnées de la ressource" .
+:textRessourceMultimediaResultat a owl:DatatypeProperty ;
+    rdfs:domain :RessourceMultimediaResultat ; rdfs:range xsd:string ;
+    rdfs:label "text de la ressource multimedia de section résultat" .
 
 
 
