@@ -47,9 +47,11 @@
 :RessourceMultimedia a owl:Class ;
     rdfs:label "Ressource multimédia" ;
     rdfs:comment "Image, spectre, profil, ou ressource visuelle contenue dans une annexe." .
+
 :RessourceMultimediaResultat a owl:Class ;
     rdfs:label "RessourceMultimedia Resultat" ;
-    rdfs:comment "Image, spectre, profil, ou ressource visuelle contenue dans résulat." 
+    rdfs:comment "Image, spectre, profil, ou ressource visuelle contenue dans résulat." .
+
 :Responsable a owl:Class ;
     rdfs:label "Responsable" ;
     rdfs:comment "Personne responsable ou auteur du rapport." .
