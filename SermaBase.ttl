@@ -178,17 +178,13 @@
     rdfs:domain :Livrable ; rdfs:range xsd:string ;
     rdfs:label "annexes associées" .
 
-:typeAnnexe a owl:DatatypeProperty ;
-    rdfs:domain :Annexe ; rdfs:range xsd:string ;
-    rdfs:label "type d’annexe" .
-
 :contenuAnnexe a owl:DatatypeProperty ;
     rdfs:domain :Annexe ; rdfs:range xsd:string ;
     rdfs:label "contenu annexe" .
 
-:descriptionRessourceMultimedia a owl:DatatypeProperty ;
+:textRessourceMultimedia a owl:DatatypeProperty ;
     rdfs:domain :RessourceMultimedia ; rdfs:range xsd:string ;
-    rdfs:label "description de la ressource multimediae" .
+    rdfs:label "text de la ressource multimediae" .
 
 :metadataRessource a owl:DatatypeProperty ;
     rdfs:domain :RessourceMultimedia ; rdfs:range xsd:string ;
