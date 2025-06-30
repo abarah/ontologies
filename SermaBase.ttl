@@ -188,11 +188,11 @@
 
 :nombreFichiers a owl:DatatypeProperty ;
     rdfs:domain :Annexe ; rdfs:range xsd:integer ;
-    rdfs:label "nombre de fichiers" .
+    rdfs:label "nombre de fichiers de l'annexe" .
 
-:descriptionRessource a owl:DatatypeProperty ;
+:descriptionAnnexe a owl:DatatypeProperty ;
     rdfs:domain :RessourceMultimedia ; rdfs:range xsd:string ;
-    rdfs:label "description de la ressource" .
+    rdfs:label "description de l'annexe" .
 
 :metadataRessource a owl:DatatypeProperty ;
     rdfs:domain :RessourceMultimedia ; rdfs:range xsd:string ;
