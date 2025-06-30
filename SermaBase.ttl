@@ -105,9 +105,10 @@
     rdfs:domain :Annexe ; rdfs:range :RessourceMultimedia ;
     rdfs:label "contient ressource" ;
     rdfs:comment "Lien entre une annexe et ses ressources multimédias." .
-:annexeContient a owl:ObjectProperty ;
+
+:resultatContient a owl:ObjectProperty ;
     rdfs:domain :Resultat ; rdfs:range :RessourceMultimediaResultat ;
-    rdfs:label "contient ressource" ;
+    rdfs:label "contient résultat" ;
     rdfs:comment "Lien entre résultat  et ses ressources multimédias." .
 
 :dateAnalyse a owl:DatatypeProperty ;
@@ -161,10 +162,6 @@
 :tableauResultat a owl:DatatypeProperty ;
     rdfs:domain :Resultat ; rdfs:range xsd:string ;
     rdfs:label "tableau résultat" .
-
-:descriptionfichiersResultat a owl:DatatypeProperty ;
-    rdfs:domain :Resultat ; rdfs:range xsd:anyURI ;
-    rdfs:label "description fichiers résultat" .
 
 :texteConclusion a owl:DatatypeProperty ;
     rdfs:domain :Conclusion ; rdfs:range xsd:string ;
