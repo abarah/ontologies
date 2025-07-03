@@ -17,7 +17,7 @@
     rdfs:comment "Échantillon analysé (avec date d’analyse, référence, etc.)." .
 
 :ObjetAnalyse a owl:Class ;
-    rdfs:label "Objet analysé" ;
+    rdfs:label "Objet" ;
     rdfs:comment "Objet de rapport d'analyse soumis à l’analyse . " .
 
 :ProgrammeAnalyse a owl:Class ;
