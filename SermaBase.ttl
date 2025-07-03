@@ -18,7 +18,7 @@
 
 :ObjetAnalyse a owl:Class ;
     rdfs:label "Objet analysé" ;
-    rdfs:comment "Objet soumis à l’analyse (matériel ou information). Utile aussi pour les devis ou fiches." .
+    rdfs:comment "Objet de rapport d'analyse soumis à l’analyse . " .
 
 :ProgrammeAnalyse a owl:Class ;
     rdfs:label "Programme d’analyse" ;
