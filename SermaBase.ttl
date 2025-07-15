@@ -48,10 +48,6 @@
     rdfs:label "Ressource multimédia" ;
     rdfs:comment "Image, spectre, profil, ou ressource visuelle utilisée dans un rapport ou une annexe." .
 
-:Responsable a owl:Class ;
-    rdfs:label "Responsable" ;
-    rdfs:comment "Personne responsable ou auteur du rapport." .
-
 :rapportInclutEchantillon a owl:ObjectProperty ;
     rdfs:domain :RapportAnalyse ; rdfs:range :Echantillon ;
     rdfs:label "inclut échantillon" ;
@@ -83,17 +79,15 @@
     rdfs:label "inclut annexe" ;
     rdfs:comment "Lien vers les annexes du rapport." .
 
-:rapportRedigePar a owl:ObjectProperty ;
-    rdfs:domain :RapportAnalyse ; rdfs:range :Responsable ;
-    rdfs:label "rédigé par" ;
-    rdfs:comment "Lien entre le rapport et son auteur/responsable." .
-
 :contientRessource  a owl:ObjectProperty ;
-    rdfs:domain :Annexe,Resultat ; rdfs:range :RessourceMultimedia ;
+    rdfs:domain :Annexe,:Resultat ; rdfs:range :RessourceMultimedia ;
     rdfs:label "contient ressource" ;
     rdfs:comment "Lien entre une entité (Annexe ou Résultat) et ses ressources multimédias." .
 
 
+:responsableRapport a owl:DatatypeProperty ;
+    rdfs:domain :RapportAnalyse ; rdfs:range xsd:string ;
+    rdfs:label "responsable d'analyse" .
 
 :dateAnalyse a owl:DatatypeProperty ;
     rdfs:domain :Echantillon ; rdfs:range xsd:dateTime ;
