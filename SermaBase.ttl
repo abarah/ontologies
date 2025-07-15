@@ -179,16 +179,16 @@
 
     
 :rapportContientObjet a owl:ObjectProperty ;
-    rdfs:domain [ owl:unionOf ( :RapportAnalyse :Devis ) ] ;
+    rdfs:domain :RapportAnalyse,:Devis;
     rdfs:range :ObjetAnalyse ;
-    rdfs:label "contient objet analysé"@fr ;
-    rdfs:comment "Le document (rapport ou devis) inclut un objet à analyser."@fr .
+    rdfs:label "contient objet analysé" ;
+    rdfs:comment "Le document (rapport ou devis) inclut un objet à analyser." .
 
 :utiliseProgramme a owl:ObjectProperty ;
-    rdfs:domain [ owl:unionOf ( :RapportAnalyse :Devis ) ] ;
+    rdfs:domain :RapportAnalyse,:Devis ;
     rdfs:range :ProgrammeAnalyse ;
-    rdfs:label "utilise programme"@fr ;
-    rdfs:comment "Le document (rapport ou devis) utilise un programme ou protocole d’analyse."@fr .
+    rdfs:label "utilise programme";
+    rdfs:comment "Le document (rapport ou devis) utilise un programme ou protocole d’analyse.".
 
 :devisAUnPrix a owl:ObjectProperty ;
     rdfs:domain :Devis ;
