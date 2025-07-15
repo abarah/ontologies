@@ -1,0 +1,517 @@
+@prefix : <http://data.serma.org/ontoserma#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:DocumentMetier a owl:Class ;
+    rdfs:label "Document métier" ;
+    rdfs:comment "Classe générale représentant n’importe quel document interne du groupe Serma." .
+
+:RapportAnalyse a owl:Class ;
+    rdfs:label "Rapport d’analyse" ;
+    rdfs:subClassOf :DocumentMetier ;
+    rdfs:comment "Document qui synthétise les résultats d’analyses techniques." .
+
+:Echantillon a owl:Class ;
+    rdfs:label "Échantillon" ;
+    rdfs:comment "Échantillon analysé (avec date d’analyse, référence, etc.)." .
+
+:ObjetAnalyse a owl:Class ;
+    rdfs:label "Objet" ;
+    rdfs:comment "Objet de rapport d'analyse soumis à l’analyse . " .
+
+:ProgrammeAnalyse a owl:Class ;
+    rdfs:label "Programme d’analyse" ;
+    rdfs:comment "Méthodologie ou protocole utilisé lors de l’analyse." .
+
+:ParametreAnalytique a owl:Class ;
+    rdfs:label "Paramètre analytique" ;
+    rdfs:comment "Paramètre (température, durée, etc.) contrôlé pendant l’analyse." .
+
+:Resultat a owl:Class ;
+    rdfs:label "Résultat" ;
+    rdfs:comment "Résultat de l’analyse (texte, tableau, graphe, etc.)." .
+
+:Conclusion a owl:Class ;
+    rdfs:label "Conclusion" ;
+    rdfs:comment "Conclusion écrite tirée de l’analyse." .
+
+:Livrable a owl:Class ;
+    rdfs:label "Livrable" ;
+    rdfs:comment "Livrable résultant de l’analyse (rapport final, présentation PPT, etc.)." .
+
+:Annexe a owl:Class ;
+    rdfs:label "Annexe" ;
+    rdfs:comment "Annexe jointe au rapport contenant des images, spectres, profils, tableaux, etc." .
+
+:RessourceMultimedia a owl:Class ;
+    rdfs:label "Ressource multimédia" ;
+    rdfs:comment "Image, spectre, profil, ou ressource visuelle contenue dans une annexe." .
+
+:RessourceMultimediaResultat a owl:Class ;
+    rdfs:label "RessourceMultimedia Resultat" ;
+    rdfs:comment "Image, spectre, profil, ou ressource visuelle contenue dans résulat." .
+
+:Responsable a owl:Class ;
+    rdfs:label "Responsable" ;
+    rdfs:comment "Personne responsable ou auteur du rapport." .
+
+:rapportInclutEchantillon a owl:ObjectProperty ;
+    rdfs:domain :RapportAnalyse ; rdfs:range :Echantillon ;
+    rdfs:label "inclut échantillon" ;
+    rdfs:comment "Lien entre un rapport et un échantillon analysé." .
+
+:rapportInclutObjet a owl:ObjectProperty ;
+    rdfs:domain :RapportAnalyse ; rdfs:range :ObjetAnalyse ;
+    rdfs:label "inclut objet" ;
+    rdfs:comment "Lien entre un rapport et l’objet analysé." .
+
+:rapportAPourProgramme a owl:ObjectProperty ;
+    rdfs:domain :RapportAnalyse ; rdfs:range :ProgrammeAnalyse ;
+    rdfs:label "a pour programme" ;
+    rdfs:comment "Lien vers le programme ou protocole d’analyse." .
+
+:rapportInclutParametre a owl:ObjectProperty ;
+    rdfs:domain :RapportAnalyse ; rdfs:range :ParametreAnalytique ;
+    rdfs:label "inclut paramètre" ;
+    rdfs:comment "Lien vers les paramètres utilisés lors de l’analyse." .
+
+:rapportProduitResultat a owl:ObjectProperty ;
+    rdfs:domain :RapportAnalyse ; rdfs:range :Resultat ;
+    rdfs:label "produit résultat" ;
+    rdfs:comment "Lien entre un rapport et les résultats générés." .
+
+:rapportInclutConclusion a owl:ObjectProperty ;
+    rdfs:domain :RapportAnalyse ; rdfs:range :Conclusion ;
+    rdfs:label "inclut conclusion" ;
+    rdfs:comment "Lien vers la conclusion du rapport." .
+
+:rapportInclutLivrable a owl:ObjectProperty ;
+    rdfs:domain :RapportAnalyse ; rdfs:range :Livrable ;
+    rdfs:label "inclut livrable" ;
+    rdfs:comment "Lien vers un livrable associé (ex. PPT)." .
+
+:rapportInclutAnnexe a owl:ObjectProperty ;
+    rdfs:domain :RapportAnalyse ; rdfs:range :Annexe ;
+    rdfs:label "inclut annexe" ;
+    rdfs:comment "Lien vers les annexes du rapport." .
+
+:rapportRedigePar a owl:ObjectProperty ;
+    rdfs:domain :RapportAnalyse ; rdfs:range :Responsable ;
+    rdfs:label "rédigé par" ;
+    rdfs:comment "Lien entre le rapport et son auteur/responsable." .
+
+:annexeContient a owl:ObjectProperty ;
+    rdfs:domain :Annexe ; rdfs:range :RessourceMultimedia ;
+    rdfs:label "contient ressource" ;
+    rdfs:comment "Lien entre une annexe et ses ressources multimédias." .
+
+:resultatContient a owl:ObjectProperty ;
+    rdfs:domain :Resultat ; rdfs:range :RessourceMultimediaResultat ;
+    rdfs:label "contient résultat" ;
+    rdfs:comment "Lien entre résultat  et ses ressources multimédias." .
+
+:dateAnalyse a owl:DatatypeProperty ;
+    rdfs:domain :Echantillon ; rdfs:range xsd:dateTime ;
+    rdfs:label "date d’analyse" .
+
+:textObjet a owl:DatatypeProperty ;
+    rdfs:domain :ObjetAnalyse ;rdfs:range xsd:string ;
+    rdfs:label "text objet" .
+
+:dateReception a owl:DatatypeProperty ;
+    rdfs:domain :Echantillon ; rdfs:range xsd:dateTime ;
+    rdfs:label "date de réception" .
+
+:referenceEchantillon a owl:DatatypeProperty ;
+    rdfs:domain :Echantillon ; rdfs:range xsd:string ;
+    rdfs:label "référence échantillon" .
+
+:commentaireEchantillon a owl:DatatypeProperty ;
+    rdfs:domain :Echantillon ; rdfs:range xsd:string ;
+    rdfs:label "commentaire échantillon" .
+
+:descriptionObjet a owl:DatatypeProperty ;
+    rdfs:domain :ObjetAnalyse ; rdfs:range xsd:string ;
+    rdfs:label "description objet" .
+
+:photoObjet a owl:DatatypeProperty ;
+    rdfs:domain :ObjetAnalyse ; rdfs:range xsd:anyURI ;
+    rdfs:label "photo objet" .
+
+:techniqueAnalyse a owl:DatatypeProperty ;
+    rdfs:domain :ProgrammeAnalyse ; rdfs:range xsd:string ;
+    rdfs:label "technique d’analyse" .
+
+:methodologie a owl:DatatypeProperty ;
+    rdfs:domain :ProgrammeAnalyse ; rdfs:range xsd:string ;
+    rdfs:label "méthodologie" .
+
+:temperatureParam a owl:DatatypeProperty ;
+    rdfs:domain :ParametreAnalytique ; rdfs:range xsd:decimal ;
+    rdfs:label "température paramètre" .
+
+:conditionsAnalytiques a owl:DatatypeProperty ;
+    rdfs:domain :Resultat ; rdfs:range xsd:string ;
+    rdfs:label "conditions analytiques" .
+
+:texteResultat a owl:DatatypeProperty ;
+    rdfs:domain :Resultat ; rdfs:range xsd:string ;
+    rdfs:label "texte résultat" .
+
+:tableauResultat a owl:DatatypeProperty ;
+    rdfs:domain :Resultat ; rdfs:range xsd:string ;
+    rdfs:label "tableau résultat" .
+
+:texteConclusion a owl:DatatypeProperty ;
+    rdfs:domain :Conclusion ; rdfs:range xsd:string ;
+    rdfs:label "texte conclusion" .
+
+:tableauConclusion a owl:DatatypeProperty ;
+    rdfs:domain :Conclusion ; rdfs:range xsd:string ;
+    rdfs:label "tableau conclusion" .
+
+:schemaConclusion a owl:DatatypeProperty ;
+    rdfs:domain :Conclusion ; rdfs:range xsd:anyURI ;
+    rdfs:label "schéma conclusion" .
+
+:dateLivrable a owl:DatatypeProperty ;
+    rdfs:domain :Livrable ; rdfs:range xsd:dateTime ;
+    rdfs:label "date livrable" .
+
+:annexesAssociees a owl:DatatypeProperty ;
+    rdfs:domain :Livrable ; rdfs:range xsd:string ;
+    rdfs:label "annexes associées" .
+
+:contenuAnnexe a owl:DatatypeProperty ;
+    rdfs:domain :Annexe ; rdfs:range xsd:string ;
+    rdfs:label "contenu annexe" .
+
+:textRessourceMultimedia a owl:DatatypeProperty ;
+    rdfs:domain :RessourceMultimedia ; rdfs:range xsd:string ;
+    rdfs:label "text de la ressource multimediae" .
+
+:textRessourceMultimediaResultat a owl:DatatypeProperty ;
+    rdfs:domain :RessourceMultimediaResultat ; rdfs:range xsd:string ;
+    rdfs:label "text de la ressource multimedia de section résultat" .
+
+
+
+:Devis a owl:Class ;
+    rdfs:label "Devis" ;
+    rdfs:subClassOf :DocumentMetier ;
+    rdfs:comment "Document de type devis technique ou commercial." .
+
+:TableauPrix a owl:Class ;
+    rdfs:label "Tableau des prix" ;
+    rdfs:comment "Tableau listant les tarifs par poste dans un devis." .
+
+:devisContientObjet a owl:ObjectProperty ;
+    rdfs:label "devis contient objet" ;
+    rdfs:domain :Devis ;
+    rdfs:range :ObjetAnalyse ;
+    rdfs:comment "Le devis inclut l’objet analysé (avec description, photo…)." .
+
+:devisAPourProgramme a owl:ObjectProperty ;
+    rdfs:label "devis a pour programme" ;
+    rdfs:domain :Devis ;
+    rdfs:range :ProgrammeAnalyse ;
+    rdfs:comment "Le devis spécifie le programme ou protocole d’analyse." .
+
+:devisContientTableauPrix a owl:ObjectProperty ;
+    rdfs:label "devis contient tableau prix" ;
+    rdfs:domain :Devis ;
+    rdfs:range :TableauPrix ;
+    rdfs:comment "Le devis comprend un tableau des prix associé." .
+
+:dateDeDevis a owl:DatatypeProperty ;
+    rdfs:label "date de devis" ;
+    rdfs:domain :Devis ;
+    rdfs:range xsd:dateTime ;
+    rdfs:comment "Date de création ou d’émission du devis." .
+
+:versionDevis a owl:DatatypeProperty ;
+    rdfs:label "version devis" ;
+    rdfs:domain :Devis ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Numéro de version ou de révision du devis." .
+
+:prixTotal a owl:DatatypeProperty ;
+    rdfs:label "prix total" ;
+    rdfs:domain :Devis ;
+    rdfs:range xsd:decimal ;
+    rdfs:comment "Somme totale des montants dans le tableau de prix." .
+:DocumentClient a owl:Class ;
+    rdfs:label "Document client" ;
+    rdfs:subClassOf :DocumentMetier ;
+    rdfs:comment "Document transmis par un client décrivant un besoin ou une problématique." .
+
+:DescriptionProblematique a owl:Class ;
+    rdfs:label "Description problématique" ;
+    rdfs:comment "Texte et photo illustrant la problématique du client." .
+
+:docClientInclutProblematique a owl:ObjectProperty ;
+    rdfs:label "docClient inclut problématique" ;
+    rdfs:domain :DocumentClient ;
+    rdfs:range :DescriptionProblematique ;
+    rdfs:comment "Le document client inclut une description de la problématique (texte+photo)." .
+
+:texteProblematique a owl:DatatypeProperty ;
+    rdfs:label "texte problématique" ;
+    rdfs:domain :DescriptionProblematique ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Texte explicatif de la problématique." .
+
+:photoProblematique a owl:DatatypeProperty ;
+    rdfs:label "photo problématique" ;
+    rdfs:domain :DescriptionProblematique ;
+    rdfs:range xsd:anyURI ;
+    rdfs:comment "Lien vers la photo illustrant la problématique." .
+
+:DocumentsMarketing a owl:Class ;
+    rdfs:label "Documents marketing" ;
+    rdfs:subClassOf :DocumentMetier ;
+    rdfs:comment "Documents à usage marketing (fiches, flyers, plaquettes, présentations, etc.)." .
+
+:FicheApplication a owl:Class ;
+    rdfs:label "Fiche d’application" ;
+    rdfs:comment "Fiche marketing / étude de cas : décrit un objet, sa mise en œuvre, etc." .
+
+:ObjetFiche a owl:Class ;
+    rdfs:label "Objet (FicheApplication)" ;
+    rdfs:comment "Objet décrit dans la fiche d’application (texte seulement)." .
+
+:TechniqueMiseEnOeuvre a owl:Class ;
+    rdfs:label "Technique mise en œuvre" ;
+    rdfs:comment "Description de la mise en œuvre de la technique, au format texte." .
+
+:ResultatMarketing a owl:Class ;
+    rdfs:label "Résultat (Marketing)" ;
+    rdfs:comment "Résultat illustré pour la fiche marketing (images, spectres, tableaux)." .
+
+:ConclusionMarketing a owl:Class ;
+    rdfs:label "Conclusion (Marketing)" ;
+    rdfs:comment "Conclusion textuelle ou schématique pour la fiche marketing." .
+
+:ficheAppInclutObjet a owl:ObjectProperty ;
+    rdfs:label "ficheApp inclut objet" ;
+    rdfs:domain :FicheApplication ;
+    rdfs:range :ObjetFiche ;
+    rdfs:comment "La fiche d’application inclut un objet (texte descriptif)." .
+
+:ficheAppInclutTechnique a owl:ObjectProperty ;
+    rdfs:label "ficheApp inclut technique" ;
+    rdfs:domain :FicheApplication ;
+    rdfs:range :TechniqueMiseEnOeuvre ;
+    rdfs:comment "La fiche d’application détaille la technique mise en œuvre." .
+
+:ficheAppInclutResultat a owl:ObjectProperty ;
+    rdfs:label "ficheApp inclut résultat" ;
+    rdfs:domain :FicheApplication ;
+    rdfs:range :ResultatMarketing ;
+    rdfs:comment "La fiche d’application présente un résultat marketing (images, spectres…)." .
+
+:ficheAppInclutConclusion a owl:ObjectProperty ;
+    rdfs:label "ficheApp inclut conclusion" ;
+    rdfs:domain :FicheApplication ;
+    rdfs:range :ConclusionMarketing ;
+    rdfs:comment "La fiche d’application se termine par une conclusion marketing." .
+
+:texteObjetFiche a owl:DatatypeProperty ;
+    rdfs:label "texte objet fiche" ;
+    rdfs:domain :ObjetFiche ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Description textuelle de l’objet dans la fiche d’application." .
+
+:FicheTechniqueAnalyse a owl:Class ;
+    rdfs:label "Fiche technique analyse" ;
+    rdfs:comment "Document technique décrivant une méthode d’analyse." .
+
+:SpecificationsTechnique a owl:Class ;
+    rdfs:label "Spécifications (Technique)" ;
+    rdfs:comment "Spécifications textuelles propres à la méthode d’analyse." .
+
+:PrincipeTechnique a owl:Class ;
+    rdfs:label "Principe (Technique)" ;
+    rdfs:comment "Principe de la méthode d’analyse (texte + schéma)." .
+
+:ficheTechInclutSpecifications a owl:ObjectProperty ;
+    rdfs:label "ficheTech inclut spécifications" ;
+    rdfs:domain :FicheTechniqueAnalyse ;
+    rdfs:range :SpecificationsTechnique ;
+    rdfs:comment "La fiche technique inclut les spécifications de la méthode." .
+
+:ficheTechInclutPrincipe a owl:ObjectProperty ;
+    rdfs:label "ficheTech inclut principe" ;
+    rdfs:domain :FicheTechniqueAnalyse ;
+    rdfs:range :PrincipeTechnique ;
+    rdfs:comment "La fiche technique détaille le principe de la méthode (texte + schéma)." .
+
+:Flyer a owl:Class ;
+    rdfs:label "Flyer" ;
+    rdfs:comment "Document marketing de type Flyer (étude de cas, avec résumé, schémas, images)." .
+
+:ResumeFlyer a owl:Class ;
+    rdfs:label "Résumé Flyer" ;
+    rdfs:comment "Résumé du Flyer, pouvant inclure texte, description schématique, spectres." .
+
+:flyerInclutResume a owl:ObjectProperty ;
+    rdfs:label "flyer inclut résumé" ;
+    rdfs:domain :Flyer ;
+    rdfs:range :ResumeFlyer ;
+    rdfs:comment "Le Flyer comprend un résumé explicatif." .
+
+:photoFlyer a owl:DatatypeProperty ;
+    rdfs:label "photo flyer" ;
+    rdfs:domain :Flyer ;
+    rdfs:range xsd:anyURI ;
+    rdfs:comment "Lien vers l’image ou spectre associé au Flyer." .
+
+:Plaquette a owl:Class ;
+    rdfs:label "Plaquette" ;
+    rdfs:comment "Plaquette marketing : recense mots‐clés métiers et liste des techniques." .
+
+:MotCleMetier a owl:Class ;
+    rdfs:label "Mot‐clé métier" ;
+    rdfs:comment "Mot‐clé métier présent dans la plaquette." .
+
+:TechniqueListe a owl:Class ;
+    rdfs:label "Technique (liste)" ;
+    rdfs:comment "Technique répertoriée dans la plaquette marketing." .
+
+:plaquetteInclutMotCle a owl:ObjectProperty ;
+    rdfs:label "plaquette inclut mot‐clé" ;
+    rdfs:domain :Plaquette ;
+    rdfs:range :MotCleMetier ;
+    rdfs:comment "La plaquette contient un ou plusieurs mots‐clés métiers." .
+
+:plaquetteInclutTechniqueListe a owl:ObjectProperty ;
+    rdfs:label "plaquette inclut technique liste" ;
+    rdfs:domain :Plaquette ;
+    rdfs:range :TechniqueListe ;
+    rdfs:comment "La plaquette énumère les techniques ou technologies évoquées." .
+
+:motCleTexte a owl:DatatypeProperty ;
+    rdfs:label "mot‐clé texte" ;
+    rdfs:domain :MotCleMetier ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Texte du mot‐clé métier." .
+
+:PresentationST a owl:Class ;
+    rdfs:label "Présentation de ST" ;
+    rdfs:subClassOf :DocumentsMarketing ;
+    rdfs:comment "Présentation (diaporama) reprise dans les documents marketing, agrège plusieurs fiches d’application." .
+
+:presentationSTInclutFicheApp a owl:ObjectProperty ;
+    rdfs:label "presentationST inclut fiche applic" ;
+    rdfs:domain :PresentationST ;
+    rdfs:range :FicheApplication ;
+    rdfs:comment "La présentation ST regroupe plusieurs fiches d’application." .
+:PrésentationCongresSES a owl:Class ;
+    rdfs:label "Présentation Congrès SES" ;
+    rdfs:subClassOf :DocumentsMarketing ;
+    rdfs:comment "Présentation technique destinée à un congrès interne SES." .
+
+:RésuméPrésentationSES a owl:Class ;
+    rdfs:label "Résumé Présentation SES" ;
+    rdfs:comment "Résumé textuel ou schématisé (texte, description de schéma, spectre, image) de la présentation technique pour le congrès interne SES." .
+
+:présCongresSESInclutRésumé a owl:ObjectProperty ;
+    rdfs:label "présCongresSES inclut résumé" ;
+    rdfs:domain :PrésentationCongresSES ;
+    rdfs:range :RésuméPrésentationSES ;
+    rdfs:comment "La présentation pour le congrès SES contient son résumé (texte+schéma+image)." .
+
+:PosterSES a owl:Class ;
+    rdfs:label "Poster SES" ;
+    rdfs:subClassOf :DocumentsMarketing ;
+    rdfs:comment "Poster de type affiche pour un congrès SES (présentation visuelle, spectre, etc.)." .
+
+:RésuméPosterSES a owl:Class ;
+    rdfs:label "Résumé Poster SES" ;
+    rdfs:comment "Résumé textuel ou schématisé (texte, description de schéma, spectre, image) du poster SES." .
+
+:posterSESInclutRésumé a owl:ObjectProperty ;
+    rdfs:label "posterSES inclut résumé" ;
+    rdfs:domain :PosterSES ;
+    rdfs:range :RésuméPosterSES ;
+    rdfs:comment "Le poster SES contient son résumé (texte+schéma+image)." .
+
+:PrésCongrèsExt a owl:Class ;
+    rdfs:label "Présentation Congrès Extérieur" ;
+    rdfs:subClassOf :DocumentsMarketing ;
+    rdfs:comment "Présentation technique soumise à un congrès externe (non SES)." .
+
+:RésuméPrésCongrèsExt a owl:Class ;
+    rdfs:label "Résumé Présentation Congrès Extérieur" ;
+    rdfs:comment "Résumé (texte, description de schéma, spectre, image) de la présentation envoyée à un congrès externe." .
+
+:presCongresExtInclutRésumé a owl:ObjectProperty ;
+    rdfs:label "presCongresExt inclut résumé" ;
+    rdfs:domain :PrésCongrèsExt ;
+    rdfs:range :RésuméPrésCongrèsExt ;
+    rdfs:comment "La présentation externe pour congrès inclut son résumé (texte+schéma+image)." .
+
+:PapierScientifique a owl:Class ;
+    rdfs:label "Papier scientifique" ;
+    rdfs:subClassOf :DocumentMetier ;
+    rdfs:comment "Article scientifique publié dans un journal ou archive ouverte." .
+
+:RésuméPapier a owl:Class ;
+    rdfs:label "Résumé Papier" ;
+    rdfs:comment "Résumé du papier scientifique (texte, description de schéma, spectre, image)." .
+
+:papierInclutRésumé a owl:ObjectProperty ;
+    rdfs:label "papier inclut résumé" ;
+    rdfs:domain :PapierScientifique ;
+    rdfs:range :RésuméPapier ;
+    rdfs:comment "L’article (papier scientifique) inclut son résumé (texte+schéma+image)." .
+
+:DocumentFormation a owl:Class ;
+    rdfs:label "Document de formation" ;
+    rdfs:subClassOf :DocumentMetier ;
+    rdfs:comment "Document pédagogique utilisé pour la formation (texte, schémas, spectres, images…)." .
+
+:RésuméFormation a owl:Class ;
+    rdfs:label "Résumé Formation" ;
+    rdfs:comment "Résumé de la formation (texte, description de schéma, spectre, image)." .
+
+:CompréhensionTechniques a owl:Class ;
+    rdfs:label "Compréhension des techniques d'analyse" ;
+    rdfs:comment "Explication pédagogique des techniques d’analyse (texte, schéma, spectre)." .
+
+:docFormationInclutRésumé a owl:ObjectProperty ;
+    rdfs:label "docFormation inclut résumé" ;
+    rdfs:domain :DocumentFormation ;
+    rdfs:range :RésuméFormation ;
+    rdfs:comment "Le document de formation contient un résumé (texte+schéma+image)." .
+
+:docFormationInclutCompréhension a owl:ObjectProperty ;
+    rdfs:label "docFormation inclut compréhension" ;
+    rdfs:domain :DocumentFormation ;
+    rdfs:range :CompréhensionTechniques ;
+    rdfs:comment "Le document de formation inclut une partie sur la compréhension des techniques d'analyse." .
+
+:photoRésumé a owl:DatatypeProperty ;
+    rdfs:label "photo résumé" ;
+    rdfs:domain :RésuméPrésentationSES, :RésuméPrésCongrèsExt ;
+    rdfs:range xsd:anyURI ;
+    rdfs:comment "Lien vers la photo ou le spectre illustrant le résumé." .
+
+:texteRésumé a owl:DatatypeProperty ;
+    rdfs:label "texte résumé" ;
+    rdfs:domain :RésuméPrésentationSES, :RésuméPosterSES, :RésuméPrésCongrèsExt, :RésuméPapier, :RésuméFormation ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Contenu textuel du résumé (peut mentionner les points clés, les schémas, etc.)." .
+
+:descriptionSchéma a owl:DatatypeProperty ;
+    rdfs:label "description schéma" ;
+    rdfs:domain :RésuméPrésentationSES, :RésuméPosterSES, :RésuméPrésCongrèsExt, :RésuméPapier, :RésuméFormation ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Description textuelle du schéma ou de l’image." .
+
+:spectreImage a owl:DatatypeProperty ;
+    rdfs:label "spectre/image" ;
+    rdfs:domain :RésuméPrésentationSES, :RésuméPosterSES, :RésuméPrésCongrèsExt, :RésuméPapier, :RésuméFormation ;
+    rdfs:range xsd:anyURI ;
+    rdfs:comment "Lien vers un spectre ou une image illustrant le contenu du résumé." .
