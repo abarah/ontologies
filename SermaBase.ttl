@@ -250,7 +250,7 @@
     rdfs:comment "Documents à usage marketing (fiches, flyers, plaquettes, présentations, etc.)." .
 
 :FicheApplication a owl:Class ;
-    rdfs:label "Fiche d'application";
+    rdfs:label "Fiche Application";
     rdfs:subClassOf :DocumentsMarketing ;
     rdfs:comment "Fiche marketing illustrant une application concrète ou une étude de cas."
 
