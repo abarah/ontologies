@@ -250,7 +250,7 @@
     rdfs:comment "Documents à usage marketing (fiches, flyers, plaquettes, présentations, etc.)." .
 
 :FicheApplication a owl:Class ;
-    rdfs:label "Fiche Application";
+    rdfs:label "Fiche Application" ;
     rdfs:subClassOf :DocumentsMarketing ;
     rdfs:comment "Fiche marketing illustrant une application concrète ou une étude de cas."
 
@@ -264,19 +264,19 @@
 :ficheAppDecritObjet a owl:ObjectProperty ;
     rdfs:domain :FicheApplication ;
     rdfs:range :ObjetAnalyse ;
-    rdfs:label "décrit objet";
+    rdfs:label "décrit objet" ;
     rdfs:comment "La fiche d'application décrit un objet analysé ou utilisé dans le cas d'usage.".
 
 :ficheAppDecritTechnique a owl:ObjectProperty ;
     rdfs:domain :FicheApplication ;
     rdfs:range :TechniqueMiseEnOeuvre ;
-    rdfs:label "décrit technique";
+    rdfs:label "décrit technique" ;
     rdfs:comment "Technique mise en œuvre présentée dans la fiche d'application.".
 
 :ficheAppMontreResultat a owl:ObjectProperty ;
     rdfs:domain :FicheApplication ;
     rdfs:range :Resultat ;
-    rdfs:label "présente un résultat";
+    rdfs:label "présente un résultat" ;
     rdfs:comment "Résultat mis en avant dans la fiche marketing (image, graphique, etc.).".
 
 :ficheAppInclutConclusion a owl:ObjectProperty ;
