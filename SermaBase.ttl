@@ -309,7 +309,7 @@
 
 :Résumé a owl:Class ;
     rdfs:label "Résumé" ;
-    rdfs:comment "Résumé textuel ou illustré (texte, schéma, spectre, image) lié à un document." 
+    rdfs:comment "Résumé textuel ou illustré (texte, schéma, spectre, image) lié à un document." .
 
 :Flyer a owl:Class ;
     rdfs:subClassOf :DocumentsMarketing ;
