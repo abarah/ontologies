@@ -308,7 +308,7 @@
     rdfs:comment "La fiche technique détaille le principe de la méthode (texte + schéma)." .
 
 :Résumé a owl:Class ;
-    rdfs:label "Résumé" ;
+    rdfs:label "Resume" ;
     rdfs:comment "Résumé textuel ou illustré (texte, schéma, spectre, image) lié à un document." .
 
 :Flyer a owl:Class ;
