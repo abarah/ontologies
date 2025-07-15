@@ -8,7 +8,7 @@
     rdfs:comment "Classe générale représentant n’importe quel document interne du groupe Serma." .
 
 :RapportAnalyse a owl:Class ;
-    rdfs:label "Rapport d’analyse" ;
+    rdfs:label "Rapport d'analyse" ;
     rdfs:subClassOf :DocumentMetier ;
     rdfs:comment "Document qui synthétise les résultats d’analyses techniques." .
 
@@ -250,7 +250,7 @@
     rdfs:comment "Documents à usage marketing (fiches, flyers, plaquettes, présentations, etc.)." .
 
 :FicheApplication a owl:Class ;
-    rdfs:label "Fiche d’application";
+    rdfs:label "Fiche d'application";
     rdfs:subClassOf :DocumentsMarketing ;
     rdfs:comment "Fiche marketing illustrant une application concrète ou une étude de cas."
 
