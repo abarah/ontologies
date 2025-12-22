@@ -169,12 +169,6 @@
     rdfs:domain :Echantillon ; rdfs:range xsd:string ;
     rdfs:label "commentaire échantillon" .
 
-:ObjetAnalyse a owl:Class ;
-    rdfs:label "Objet d'analyse" ;
-    rdfs:comment "Objet technique soumis à une analyse, dans un document." .
-
-
-
 
 
 :ObjetRapport a owl:Class ;
@@ -186,7 +180,7 @@
 
 :ObjetDevis a owl:Class ;
     rdfs:label "Objet du devis" ;
-    rdfs:comment "Objet concerné par le rapport d'analyse." .
+    rdfs:comment "Objet concerné par le Devis." .
 
 
 
