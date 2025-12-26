@@ -1,4 +1,4 @@
-@prefix : <http://data.serma.org/ontorapport#> .
+@prefix : <http://data.serma.org/ontoserma#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -7,20 +7,24 @@
 # DOCUMENTS
 ############################################################
 
-
 :DocumentMetier a owl:Class ;
   rdfs:label "Document métier" ;
-  rdfs:comment "Classe générale représentant n'importe quel document interne du groupe Serma." .
+  rdfs:comment "Classe générale représentant tout document interne du groupe SERMA." .
 
 :RapportAnalyse a owl:Class ;
+  rdfs:label "Rapport d'analyse" ;
   rdfs:subClassOf :DocumentMetier ;
-  rdfs:label "Rapports d'analyse" ;
-  rdfs:comment "Document qui synthétise les résultats d'analyses techniques." .
+  rdfs:comment "Document qui synthétise les résultats d’analyses techniques." .
 
 :Devis a owl:Class ;
-  rdfs:subClassOf :DocumentMetier ;
   rdfs:label "Devis" ;
+  rdfs:subClassOf :DocumentMetier ;
   rdfs:comment "Document de type devis technique ou commercial." .
+
+:PropositionCommerciale a owl:Class ;
+  rdfs:label "Proposition commerciale" ;
+  rdfs:subClassOf :DocumentMetier ;
+  rdfs:comment "Offre commerciale pouvant précéder ou compléter un devis." .
 
 ############################################################
 # ACTEURS
@@ -30,109 +34,214 @@
   rdfs:label "Client" ;
   rdfs:comment "Organisation cliente destinataire des documents." .
 
-:Laboratoire a owl:Class ;
-  rdfs:label "Laboratoire" ;
-  rdfs:comment "Laboratoire d'analyse." .
+:Fournisseur a owl:Class ;
+  rdfs:label "Fournisseur" ;
+  rdfs:comment "Organisation émettrice (ex: SERMA Technologies)." .
 
 ############################################################
-# ANALYSES / INSTRUMENTS / OBJET
+# ANALYSE & ÉCHANTILLONS
 ############################################################
 
-:AnalysesEffectuees a owl:Class ;
-  rdfs:label "Analyses effectuées" ;
-  rdfs:comment "Analyses effectuées dans un rapport d'analyse." .
+:Echantillon a owl:Class ;
+  rdfs:label "Échantillon" ;
+  rdfs:comment "Échantillon analysé dans le cadre d’un rapport." .
+
+:AnalysesProposees a owl:Class ;
+  rdfs:label "Analyses proposées" ;
+  rdfs:comment "Analyses proposées dans un devis ou une proposition commerciale." .
+
 
 :CorpsEtranger a owl:Class ;
   rdfs:label "Corps étranger" ;
   rdfs:comment "Défaut correspondant à la présence d’un élément indésirable ou exogène dans ou sur un échantillon, un composant ou un objet analysé." .
 
-:ZoneAnalyse a owl:Class ;
-  rdfs:label "Zone d'analyse" ;
-  rdfs:comment "Zone localisée d’un échantillon, d’un objet ou d’un élément constitutif sur laquelle une ou plusieurs analyses sont réalisées." .
-
-:Surface a owl:Class ;
-  rdfs:label "Surface" ;
-  rdfs:comment "Surface physique d’un échantillon, d’un objet ou d’un élément constitutif pouvant être observée, analysée ou caractérisée." .
-
-:Defaut a owl:Class ;
-  rdfs:label "Défaut" ;
-  rdfs:comment "Défaut observé ou recherché sur la surface." .
-
 :InstrumentAnalyse a owl:Class ;
   rdfs:label "Instrument d'analyse" ;
-  rdfs:comment "Instrument ou technique d’analyse (FTIR, MEB, XPS…)."
-.
+  rdfs:comment "Instrument ou technique d’analyse (FTIR, MEB, XPS…).".
 
 :detailsInstrument a owl:DatatypeProperty ;
   rdfs:domain :InstrumentAnalyse ;
-  rdfs:range xsd:string ;
+  rdfs:range xsd:String ;
   rdfs:label "détails instrument d'analyse" .
-
+  
 :Materiaux a owl:Class ;
   rdfs:label "Matériaux" ;
-  rdfs:comment "Liste des matériaux ou composants associés à une analyse." .
+  rdfs:comment "liste des Matériaux ou composants associés à une analyse." .
 
 :ElementsChimiques a owl:Class ;
   rdfs:label "Éléments chimiques" ;
-  rdfs:comment "Liste des éléments chimiques recherchés ou identifiés." .
+  rdfs:comment "list des Éléments chimiques recherchés ou identifiés." .
 
-:ObjetAnalyse a owl:Class ;
-  rdfs:label "Objet d'analyse" ;
-  rdfs:comment "Objet technique soumis à une analyse, dans un document." .
+############################################################
+# ANNEXES & MULTIMÉDIA
+############################################################
+
+:Annexe a owl:Class ;
+  rdfs:label "Annexe" ;
+  rdfs:comment "Annexe jointe à un rapport ou un devis." .
+
+:MultimediaAnnexe a owl:Class ;
+  rdfs:label "Ressource multimédia d'annexe" ;
+  rdfs:comment "Image ou spectre joint à une annexe." .
+
+############################################################
+# OBJETS
+############################################################
+
+:Objet a owl:Class ;
+  rdfs:label "Objet" ;
+  rdfs:comment "Objet concerné par un devis ou une proposition commerciale." .
 
 :descriptionObjet a owl:DatatypeProperty ;
-  rdfs:domain :ObjetAnalyse ;
+  rdfs:domain :Objet ;
   rdfs:range xsd:string ;
-  rdfs:label "description objet" ;
-  rdfs:comment "Texte descriptif associé à l'objet." .
+  rdfs:label "description Objet" .
 
 ############################################################
-# IDENTIFIANTS / COORDONNEES
+# PRIX
 ############################################################
 
-:codedaffaireRapport a owl:DatatypeProperty ;
-  rdfs:domain :RapportAnalyse ;
-  rdfs:range xsd:string ;
-  rdfs:label "code d'affaire Rapport" .
-  
-:codeClient a owl:DatatypeProperty ;
-  rdfs:domain :Client ;
-  rdfs:range xsd:string ;
-  rdfs:label "code client" .
+:Prix a owl:Class ;
+  rdfs:label "Prix" ;
+  rdfs:comment "Informations tarifaires associées à un devis." .
 
-:numeroClient a owl:DatatypeProperty ;
-  rdfs:domain :Client ;
-  rdfs:range xsd:string ;
-  rdfs:label "numéro client" .
+:FraisGestion a owl:Class ;
+  rdfs:label "Frais de gestion" .
 
-:destinataireRapport a owl:ObjectProperty ;
-  rdfs:domain :RapportAnalyse ;
+:FraisRetour a owl:Class ;
+  rdfs:label "Frais de retour" .
+
+############################################################
+# LIVRABLES & LOGISTIQUE
+############################################################
+
+:Livrable a owl:Class ;
+  rdfs:label "Livrable" .
+
+
+
+############################################################
+# CLAUSES
+############################################################
+
+:Clausesdanalyse a owl:Class ;
+  rdfs:label "Clause de proposition" ;
+  rdfs:comment "ClauseConfidentialite ,Clause de force majeure.".
+
+
+
+:descriptionClause a owl:DatatypeProperty ;
+  rdfs:domain :Clausesdanalyse;
+  rdfs:range xsd:string ;
+  rdfs:label "description clause" .
+############################################################
+# PROPRIÉTÉS OBJET
+############################################################
+
+:devisPourClient a owl:ObjectProperty ;
+  rdfs:domain :Devis ;
   rdfs:range :Client ;
-  rdfs:label "destinataire du rapport" .
+  rdfs:label "devis pour client" .
 
-############################################################
-# LIENS ANALYSE
-############################################################
+:propositionPourClient a owl:ObjectProperty ;
+  rdfs:domain :PropositionCommerciale ;
+  rdfs:range :Client ;
+  rdfs:label "proposition pour client" .
 
-:analysesEffectueesParRapport a owl:ObjectProperty ;
-  rdfs:domain :RapportAnalyse ;
-  rdfs:range :AnalysesEffectuees ;
-  rdfs:label "analyses effectuées par le rapport d'analyse" .
+:propositionEmisePar a owl:ObjectProperty ;
+  rdfs:domain :PropositionCommerciale ;
+  rdfs:range :Fournisseur ;
+  rdfs:label "proposition émise par" .
+
+:devisEmisPar a owl:ObjectProperty ;
+  rdfs:domain :Devis ;
+  rdfs:range :Fournisseur ;
+  rdfs:label "Devis émise par" .
+
+:devisContientObjet a owl:ObjectProperty ;
+  rdfs:domain :Devis ;
+  rdfs:range :Objet ;
+  rdfs:label "contient objet" .
+
+:propositionContientObjet a owl:ObjectProperty ;
+  rdfs:domain :PropositionCommerciale ;
+  rdfs:range :Objet ;
+  rdfs:label "contient objet" .
+
+:analysesProposeesParDevis a owl:ObjectProperty ;
+  rdfs:domain :Devis ;
+  rdfs:range :AnalysesProposees ;
+  rdfs:label "analyses proposées par devis" .
+
+:analysesProposeesParProposition a owl:ObjectProperty ;
+  rdfs:domain :PropositionCommerciale ;
+  rdfs:range :AnalysesProposees ;
+  rdfs:label "analyses proposées par proposition" .
 
 :analyseUtiliseInstrument a owl:ObjectProperty ;
-  rdfs:domain :AnalysesEffectuees ;
+  rdfs:domain :AnalysesProposees ;
   rdfs:range :InstrumentAnalyse ;
   rdfs:label "utilise instrument" .
 
 :analyseUtiliseMateriaux a owl:ObjectProperty ;
-  rdfs:domain :AnalysesEffectuees ;
+  rdfs:domain :AnalysesProposees ;
   rdfs:range :Materiaux ;
   rdfs:label "utilise matériaux" .
 
 :analyseInclutElementsChimiques a owl:ObjectProperty ;
-  rdfs:domain :AnalysesEffectuees ;
+  rdfs:domain :AnalysesProposees ;
   rdfs:range :ElementsChimiques ;
-  rdfs:label "analyse inclut éléments chimiques" .
+  rdfs:label "inclut éléments chimiques" .
+
+:echantillonInclutElementsChimiques a owl:ObjectProperty ;
+  rdfs:domain :Echantillon ;
+  rdfs:range :ElementsChimiques ;
+  rdfs:label "inclut éléments chimiques" .
+
+:devisAUnPrix a owl:ObjectProperty ;
+  rdfs:domain :Devis ;
+  rdfs:range :Prix ;
+  rdfs:label "a un prix" .
+
+:PropositionCommercialeincluPrix a owl:ObjectProperty ;
+  rdfs:domain :PropositionCommerciale ;
+  rdfs:range :Prix ;
+  rdfs:label "inclut prix" .
+
+:prixInclutFraisGestion a owl:ObjectProperty ;
+  rdfs:domain :Prix ;
+  rdfs:range :FraisGestion ;
+  rdfs:label "inclut frais de gestion" .
+
+:prixInclutFraisRetour a owl:ObjectProperty ;
+  rdfs:domain :Prix ;
+  rdfs:range :FraisRetour ;
+  rdfs:label "inclut frais de retour" .
+
+:propositionInclutLivrable a owl:ObjectProperty ;
+  rdfs:domain :PropositionCommerciale ;
+  rdfs:range :Livrable ;
+  rdfs:label "inclut livrable" .
+
+:devisInclutLivrable a owl:ObjectProperty ;
+  rdfs:domain :Devis ;
+  rdfs:range :Livrable ;
+  rdfs:label "inclut livrable" .
+
+:echantillonEstAccompagnePar a owl:ObjectProperty ;
+  rdfs:domain :Echantillon ;
+  rdfs:range :BordereauLivraison , :BonLivraison ;
+  rdfs:label "est accompagné par" .
+
+:propositionImposeClause a owl:ObjectProperty ;
+  rdfs:domain :PropositionCommerciale ;
+  rdfs:range :ClauseConfidentialite , :ClauseForceMajeure ;
+  rdfs:label "impose clause" .
+
+:annexeContientRessource a owl:ObjectProperty ;
+  rdfs:domain :Annexe ;
+  rdfs:range :MultimediaAnnexe ;
+  rdfs:label "contient ressource annexe" .
 
 :corpsEtrangerObserveSur a owl:ObjectProperty ;
   rdfs:domain :CorpsEtranger ;
@@ -148,7 +257,7 @@
 
 :methodeDetectionCorpsEtranger a owl:ObjectProperty ;
   rdfs:domain :CorpsEtranger ;
-  rdfs:range : AnalysesEffectuees;
+  rdfs:range : AnalysesProposees;
   rdfs:label "méthode de détection" ;
   rdfs:comment "Méthode ou technique utilisée pour détecter le corps étranger (ex : MEB-EDS, TOF-SIMS, microscopie optique)." .
 
@@ -165,66 +274,9 @@
   rdfs:label "composition du corps étranger" ;
   rdfs:comment "Description textuelle ou synthèse de la composition chimique identifiée (ex : Al, Si, C, F)." .
 
-:zoneAnalyseSitueeSur a owl:ObjectProperty ;
-  rdfs:domain :ZoneAnalyse ;
-  rdfs:range :Echantillon ;
-  rdfs:label "zone d'analyse située sur" ;
-  rdfs:comment "Indique l’échantillon, l’objet ou l’élément constitutif sur lequel la zone d’analyse est définie." .
-
-:zoneAnalyseParAnalyse a owl:ObjectProperty ;
-  rdfs:domain :ZoneAnalyse ;
-  rdfs:range :AnalysesEffectuees ;
-  rdfs:label "zone d'analyse analysée par" ;
-  rdfs:comment "Analyse ou technique appliquée à la zone d'analyse." .
-
-:descriptionZoneAnalyse a owl:DatatypeProperty ;
-  rdfs:domain :ZoneAnalyse ;
-  rdfs:range xsd:string ;
-  rdfs:label "description de la zone d'analyse" ;
-  rdfs:comment "Description textuelle de la zone d’analyse telle que décrite dans le rapport." .
-
-:typeZoneAnalyse a owl:DatatypeProperty ;
-  rdfs:domain :ZoneAnalyse ;
-  rdfs:range xsd:string ;
-  rdfs:label "type de zone d'analyse" ;
-  rdfs:comment "Type de zone analysée (ex : zone plane, zone pliée, zone de soudure, cavité interne)." .
-
-:typeSurface a owl:DatatypeProperty ;
-  rdfs:domain :Surface ;
-  rdfs:range xsd:string ;
-  rdfs:label "type de surface" ;
-  rdfs:comment "Type de surface (ex : surface plane, surface pliée, surface décapée, surface polie)." .
-
-:surfaceAnalysePar a owl:ObjectProperty ;
-  rdfs:domain :Surface ;
-  rdfs:range :AnalysesEffectuees ;
-  rdfs:label "surface analysée par" ;
-  rdfs:comment "Analyse ou technique appliquée à la surface." .
-
-:surfaceAssocieeADefaut a owl:ObjectProperty ;
-  rdfs:domain :Surface ;
-  rdfs:range :Defaut ;
-  rdfs:label "surface associée à défaut" ;
-  rdfs:comment "Défaut observé ou recherché sur la surface." .
-
-:surfaceCorrespondAZoneAnalyse a owl:ObjectProperty ;
-  rdfs:domain :Surface ;
-  rdfs:range :ZoneAnalyse ;
-  rdfs:label "surface correspond à zone d’analyse" ;
-  rdfs:comment "Lien entre une surface physique et une zone d’analyse définie pour les analyses." .
-
 ############################################################
-# ECHANTILLONS
+# PROPRIÉTÉS LITTÉRALES
 ############################################################
-
-:Echantillon a owl:Class ;
-  rdfs:label "Échantillon" ;
-  rdfs:comment "Échantillon analysé (avec date d'analyse, référence, etc.)." .
-
-:echantillonInclutElementsChimiques a owl:ObjectProperty ;
-  rdfs:domain :Echantillon ;
-  rdfs:range :ElementsChimiques ;
-  rdfs:label "échantillon inclut éléments chimiques" .
 
 :dateAnalyse a owl:DatatypeProperty ;
   rdfs:domain :Echantillon ;
@@ -241,6 +293,11 @@
   rdfs:range xsd:string ;
   rdfs:label "référence échantillon" .
 
+:descriptionAnalyse a owl:DatatypeProperty ;
+  rdfs:domain :AnalysesProposees ;
+  rdfs:range xsd:string ;
+  rdfs:label "description Analyse" .
+
 :commentaireEchantillon a owl:DatatypeProperty ;
   rdfs:domain :Echantillon ;
   rdfs:range xsd:string ;
@@ -251,102 +308,79 @@
   rdfs:range xsd:integer ;
   rdfs:label "nombre d'échantillons" .
 
-:descriptionAnalyse a owl:DatatypeProperty ;
-  rdfs:domain :AnalysesEffectuees ;
+:dateDeDevis a owl:DatatypeProperty ;
+  rdfs:domain :Devis ;
+  rdfs:range xsd:dateTime ;
+  rdfs:label "date de devis" .
+
+:versionDevis a owl:DatatypeProperty ;
+  rdfs:domain :Devis ;
   rdfs:range xsd:string ;
-  rdfs:label "description Analyse" .
+  rdfs:label "version devis" .
 
-############################################################
-# RESULTATS / CONCLUSION / ANNEXES
-############################################################
-
-:Resultat a owl:Class ;
-  rdfs:label "Résultat" ;
-  rdfs:comment "Résultat de l'analyse (texte, tableau, graphe, etc.)." .
-
-:Conclusion a owl:Class ;
-  rdfs:label "Conclusion" ;
-  rdfs:comment "Conclusion écrite tirée de l'analyse." .
-
-:Annexe a owl:Class ;
-  rdfs:label "Annexe" ;
-  rdfs:comment "Annexe jointe au rapport contenant des images, spectres, profils, tableaux, etc." .
-
-:conditionsAnalytiques a owl:DatatypeProperty ;
-  rdfs:domain :Resultat ;
+:revision a owl:DatatypeProperty ;
+  rdfs:domain :PropositionCommerciale ;
   rdfs:range xsd:string ;
-  rdfs:label "description des conditions analytiques" .
+  rdfs:label "revision proposition " .
 
-:texteResultat a owl:DatatypeProperty ;
-  rdfs:domain :Resultat ;
+:prixTotal a owl:DatatypeProperty ;
+  rdfs:domain :Prix ;
+  rdfs:range xsd:decimal ;
+  rdfs:label "prix total" .
+
+:detailPrix a owl:DatatypeProperty ;
+  rdfs:domain :Prix ;
   rdfs:range xsd:string ;
-  rdfs:label "texte résultat" .
+  rdfs:label "détail des prix" .
 
-:texteConclusion a owl:DatatypeProperty ;
-  rdfs:domain :Conclusion ;
+:codeClient a owl:DatatypeProperty ;
+  rdfs:domain :Client ;
   rdfs:range xsd:string ;
-  rdfs:label "texte conclusion" .
+  rdfs:label "code client" .
 
-:contenuAnnexe a owl:DatatypeProperty ;
-  rdfs:domain :Annexe ;
+:numeroClient a owl:DatatypeProperty ;
+  rdfs:domain :Client ;
   rdfs:range xsd:string ;
-  rdfs:label "contenu annexe" .
+  rdfs:label "numéro client" .
 
-:responsableRapport a owl:DatatypeProperty ;
-  rdfs:domain :RapportAnalyse ;
+:codeFournisseur a owl:DatatypeProperty ;
+  rdfs:domain :Fournisseur ;
   rdfs:range xsd:string ;
-  rdfs:label "responsable d'analyse" .
+  rdfs:label "code fournisseur" .
 
-:rapportInclutEchantillon a owl:ObjectProperty ;
-  rdfs:domain :RapportAnalyse ;
-  rdfs:range :Echantillon ;
-  rdfs:label "inclut échantillon" .
+:codedaffaireproposition a owl:DatatypeProperty ;
+  rdfs:domain :PropositionCommerciale ;
+  rdfs:range xsd:string ;
+  rdfs:label "code d'affaire proposition" .
 
-:rapportProduitResultat a owl:ObjectProperty ;
-  rdfs:domain :RapportAnalyse ;
-  rdfs:range :Resultat ;
-  rdfs:label "produit résultat" .
+:codedaffaireDevis a owl:DatatypeProperty ;
+  rdfs:domain :Devis ;
+  rdfs:range xsd:string ;
+  rdfs:label "code d'affaire devis" .
 
-:rapportInclutConclusion a owl:ObjectProperty ;
-  rdfs:domain :RapportAnalyse ;
-  rdfs:range :Conclusion ;
-  rdfs:label "inclut conclusion" .
+:referenceProposition a owl:DatatypeProperty ;
+  rdfs:domain :PropositionCommerciale ;
+  rdfs:range xsd:string ;
+  rdfs:label "référence proposition" .
 
-:rapportInclutAnnexe a owl:ObjectProperty ;
-  rdfs:domain :RapportAnalyse ;
-  rdfs:range :Annexe ;
-  rdfs:label "inclut annexe" .
+:dateEmissionProposition a owl:DatatypeProperty ;
+  rdfs:domain :PropositionCommerciale ;
+  rdfs:range xsd:dateTime ;
+  rdfs:label "date d'émission" .
 
-############################################################
-# MULTIMEDIA (minimal)
-############################################################
-
-:MultimediaAnnexe a owl:Class ;
-  rdfs:label "Ressource multimédia d'annexe" ;
-  rdfs:comment "Image ou spectre joint à une annexe de rapport." .
+:classificationProposition a owl:DatatypeProperty ;
+  rdfs:domain :PropositionCommerciale ;
+  rdfs:range xsd:string ;
+  rdfs:label "classification proposition" .
 
 :textRessource a owl:DatatypeProperty ;
   rdfs:domain :MultimediaAnnexe ;
   rdfs:range xsd:string ;
   rdfs:label "texte ressource" .
 
-:annexeContientRessource a owl:ObjectProperty ;
-  rdfs:domain :Annexe ;
-  rdfs:range :MultimediaAnnexe ;
-  rdfs:label "contient ressource annexe" .
-
-############################################################
-# PROPRIETES DE DEVIS
-############################################################
-
-:dateDeDevis a owl:DatatypeProperty ;
-  rdfs:domain :Devis ;
-  rdfs:range xsd:dateTime ;
-  rdfs:label "date de devis" ;
-  rdfs:comment "Date de création ou d'émission du devis." .
-
-:versionDevis a owl:DatatypeProperty ;
-  rdfs:domain :Devis ;
+:intituleLivrable a owl:DatatypeProperty ;
+  rdfs:domain :Livrable ;
   rdfs:range xsd:string ;
-  rdfs:label "version devis" ;
-  rdfs:comment "Numéro de version ou de révision du devis." .
+  rdfs:label "intitulé livrable" ;
+  rdfs:comment "Titre court ou type de livrable." .
+
