@@ -7,6 +7,7 @@
 # DOCUMENTS
 ############################################################
 
+
 :DocumentMetier a owl:Class ;
   rdfs:label "Document métier" ;
   rdfs:comment "Classe générale représentant n'importe quel document interne du groupe Serma." .
@@ -41,6 +42,22 @@
   rdfs:label "Analyses effectuées" ;
   rdfs:comment "Analyses effectuées dans un rapport d'analyse." .
 
+:CorpsEtranger a owl:Class ;
+  rdfs:label "Corps étranger" ;
+  rdfs:comment "Défaut correspondant à la présence d’un élément indésirable ou exogène dans ou sur un échantillon, un composant ou un objet analysé." .
+
+:ZoneAnalyse a owl:Class ;
+  rdfs:label "Zone d'analyse" ;
+  rdfs:comment "Zone localisée d’un échantillon, d’un objet ou d’un élément constitutif sur laquelle une ou plusieurs analyses sont réalisées." .
+
+:Surface a owl:Class ;
+  rdfs:label "Surface" ;
+  rdfs:comment "Surface physique d’un échantillon, d’un objet ou d’un élément constitutif pouvant être observée, analysée ou caractérisée." .
+
+:Defaut a owl:Class ;
+  rdfs:label "Défaut" ;
+  rdfs:comment "Défaut observé ou recherché sur la surface." .
+
 :InstrumentAnalyse a owl:Class ;
   rdfs:label "Instrument d'analyse" ;
   rdfs:comment "Instrument ou technique d’analyse (FTIR, MEB, XPS…)."
@@ -73,6 +90,11 @@
 # IDENTIFIANTS / COORDONNEES
 ############################################################
 
+:codedaffaireRapport a owl:DatatypeProperty ;
+  rdfs:domain :RapportAnalyse ;
+  rdfs:range xsd:string ;
+  rdfs:label "code d'affaire Rapport" .
+  
 :codeClient a owl:DatatypeProperty ;
   rdfs:domain :Client ;
   rdfs:range xsd:string ;
@@ -111,6 +133,85 @@
   rdfs:domain :AnalysesEffectuees ;
   rdfs:range :ElementsChimiques ;
   rdfs:label "analyse inclut éléments chimiques" .
+
+:corpsEtrangerObserveSur a owl:ObjectProperty ;
+  rdfs:domain :CorpsEtranger ;
+  rdfs:range :Echantillon;
+  rdfs:label "corps étranger observé sur" ;
+  rdfs:comment "Indique l’objet, l’échantillon ou l’élément constitutif sur lequel un corps étranger est détecté." .
+
+:corpsEtrangerAnalysepar a owl:ObjectProperty ;
+  rdfs:domain :CorpsEtranger ;
+  rdfs:range :InstrumentAnalyse ;
+  rdfs:label "corps étranger analysé par" ;
+  rdfs:comment "corps étranger analysé par l'outil d'analyse" .
+
+:methodeDetectionCorpsEtranger a owl:ObjectProperty ;
+  rdfs:domain :CorpsEtranger ;
+  rdfs:range : AnalysesEffectuees;
+  rdfs:label "méthode de détection" ;
+  rdfs:comment "Méthode ou technique utilisée pour détecter le corps étranger (ex : MEB-EDS, TOF-SIMS, microscopie optique)." .
+
+
+:typeCorpsEtranger a owl:DatatypeProperty ;
+  rdfs:domain :CorpsEtranger ;
+  rdfs:range xsd:string ;
+  rdfs:label "type de corps étranger" ;
+  rdfs:comment "Nature du corps étranger (ex : métallique, organique, polymère, poussière, fibre)." .
+
+:compositionCorpsEtranger a owl:DatatypeProperty ;
+  rdfs:domain :CorpsEtranger ;
+  rdfs:range xsd:string ;
+  rdfs:label "composition du corps étranger" ;
+  rdfs:comment "Description textuelle ou synthèse de la composition chimique identifiée (ex : Al, Si, C, F)." .
+
+:zoneAnalyseSitueeSur a owl:ObjectProperty ;
+  rdfs:domain :ZoneAnalyse ;
+  rdfs:range :Echantillon ;
+  rdfs:label "zone d'analyse située sur" ;
+  rdfs:comment "Indique l’échantillon, l’objet ou l’élément constitutif sur lequel la zone d’analyse est définie." .
+
+:zoneAnalyseParAnalyse a owl:ObjectProperty ;
+  rdfs:domain :ZoneAnalyse ;
+  rdfs:range :AnalysesEffectuees ;
+  rdfs:label "zone d'analyse analysée par" ;
+  rdfs:comment "Analyse ou technique appliquée à la zone d'analyse." .
+
+:descriptionZoneAnalyse a owl:DatatypeProperty ;
+  rdfs:domain :ZoneAnalyse ;
+  rdfs:range xsd:string ;
+  rdfs:label "description de la zone d'analyse" ;
+  rdfs:comment "Description textuelle de la zone d’analyse telle que décrite dans le rapport." .
+
+:typeZoneAnalyse a owl:DatatypeProperty ;
+  rdfs:domain :ZoneAnalyse ;
+  rdfs:range xsd:string ;
+  rdfs:label "type de zone d'analyse" ;
+  rdfs:comment "Type de zone analysée (ex : zone plane, zone pliée, zone de soudure, cavité interne)." .
+
+:typeSurface a owl:DatatypeProperty ;
+  rdfs:domain :Surface ;
+  rdfs:range xsd:string ;
+  rdfs:label "type de surface" ;
+  rdfs:comment "Type de surface (ex : surface plane, surface pliée, surface décapée, surface polie)." .
+
+:surfaceAnalysePar a owl:ObjectProperty ;
+  rdfs:domain :Surface ;
+  rdfs:range :AnalysesEffectuees ;
+  rdfs:label "surface analysée par" ;
+  rdfs:comment "Analyse ou technique appliquée à la surface." .
+
+:surfaceAssocieeADefaut a owl:ObjectProperty ;
+  rdfs:domain :Surface ;
+  rdfs:range :Defaut ;
+  rdfs:label "surface associée à défaut" ;
+  rdfs:comment "Défaut observé ou recherché sur la surface." .
+
+:surfaceCorrespondAZoneAnalyse a owl:ObjectProperty ;
+  rdfs:domain :Surface ;
+  rdfs:range :ZoneAnalyse ;
+  rdfs:label "surface correspond à zone d’analyse" ;
+  rdfs:comment "Lien entre une surface physique et une zone d’analyse définie pour les analyses." .
 
 ############################################################
 # ECHANTILLONS
