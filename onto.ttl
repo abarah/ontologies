@@ -253,7 +253,7 @@
   rdfs:domain :CorpsEtranger ;
   rdfs:range :InstrumentAnalyse ;
   rdfs:label "corps étranger analysé par" ;
-  rdfs:comment "corps étranger analysé par l'outil d'analyse" .
+  rdfs:comment "corps étranger analysé par l'outil d'analyse." .
 
 :methodeDetectionCorpsEtranger a owl:ObjectProperty ;
   rdfs:domain :CorpsEtranger ;
