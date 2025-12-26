@@ -50,18 +50,27 @@
   rdfs:label "Analyses proposées" ;
   rdfs:comment "Analyses proposées dans un devis ou une proposition commerciale." .
 
+
+:CorpsEtranger a owl:Class ;
+  rdfs:label "Corps étranger" ;
+  rdfs:comment "Défaut correspondant à la présence d’un élément indésirable ou exogène dans ou sur un échantillon, un composant ou un objet analysé." .
+
 :InstrumentAnalyse a owl:Class ;
   rdfs:label "Instrument d'analyse" ;
-  rdfs:comment "Instrument ou technique d’analyse (FTIR, MEB, XPS…)."
-.
+  rdfs:comment "Instrument ou technique d’analyse (FTIR, MEB, XPS…).".
 
+:detailsInstrument a owl:DatatypeProperty ;
+  rdfs:domain :InstrumentAnalyse ;
+  rdfs:range xsd:String ;
+  rdfs:label "détails instrument d'analyse" .
+  
 :Materiaux a owl:Class ;
   rdfs:label "Matériaux" ;
-  rdfs:comment "Matériaux ou composants associés à une analyse." .
+  rdfs:comment "liste des Matériaux ou composants associés à une analyse." .
 
 :ElementsChimiques a owl:Class ;
   rdfs:label "Éléments chimiques" ;
-  rdfs:comment "Éléments chimiques recherchés ou identifiés." .
+  rdfs:comment "list des Éléments chimiques recherchés ou identifiés." .
 
 ############################################################
 # ANNEXES & MULTIMÉDIA
@@ -82,6 +91,11 @@
 :Objet a owl:Class ;
   rdfs:label "Objet" ;
   rdfs:comment "Objet concerné par un devis ou une proposition commerciale." .
+
+:descriptionObjet a owl:DatatypeProperty ;
+  rdfs:domain :Objet ;
+  rdfs:range xsd:string ;
+  rdfs:label "description Objet" .
 
 ############################################################
 # PRIX
@@ -104,22 +118,22 @@
 :Livrable a owl:Class ;
   rdfs:label "Livrable" .
 
-:BordereauLivraison a owl:Class ;
-  rdfs:label "Bordereau de livraison" .
 
-:BonLivraison a owl:Class ;
-  rdfs:label "Bon de livraison" .
 
 ############################################################
 # CLAUSES
 ############################################################
 
-:ClauseConfidentialite a owl:Class ;
-  rdfs:label "Clause de confidentialité" .
+:Clausesdanalyse a owl:Class ;
+  rdfs:label "Clause de proposition" ;
+  rdfs:comment "ClauseConfidentialite ,Clause de force majeure.".
 
-:ClauseForceMajeure a owl:Class ;
-  rdfs:label "Clause de force majeure" .
 
+
+:descriptionClause a owl:DatatypeProperty ;
+  rdfs:domain :Clausesdanalyse;
+  rdfs:range xsd:string ;
+  rdfs:label "description clause" .
 ############################################################
 # PROPRIÉTÉS OBJET
 ############################################################
@@ -138,6 +152,11 @@
   rdfs:domain :PropositionCommerciale ;
   rdfs:range :Fournisseur ;
   rdfs:label "proposition émise par" .
+
+:devisEmisPar a owl:ObjectProperty ;
+  rdfs:domain :Devis ;
+  rdfs:range :Fournisseur ;
+  rdfs:label "Devis émise par" .
 
 :devisContientObjet a owl:ObjectProperty ;
   rdfs:domain :Devis ;
@@ -184,6 +203,11 @@
   rdfs:range :Prix ;
   rdfs:label "a un prix" .
 
+:PropositionCommercialeincluPrix a owl:ObjectProperty ;
+  rdfs:domain :PropositionCommerciale ;
+  rdfs:range :Prix ;
+  rdfs:label "inclut prix" .
+
 :prixInclutFraisGestion a owl:ObjectProperty ;
   rdfs:domain :Prix ;
   rdfs:range :FraisGestion ;
@@ -196,6 +220,11 @@
 
 :propositionInclutLivrable a owl:ObjectProperty ;
   rdfs:domain :PropositionCommerciale ;
+  rdfs:range :Livrable ;
+  rdfs:label "inclut livrable" .
+
+:devisInclutLivrable a owl:ObjectProperty ;
+  rdfs:domain :Devis ;
   rdfs:range :Livrable ;
   rdfs:label "inclut livrable" .
 
@@ -213,6 +242,37 @@
   rdfs:domain :Annexe ;
   rdfs:range :MultimediaAnnexe ;
   rdfs:label "contient ressource annexe" .
+
+:corpsEtrangerObserveSur a owl:ObjectProperty ;
+  rdfs:domain :CorpsEtranger ;
+  rdfs:range :Echantillon;
+  rdfs:label "corps étranger observé sur" ;
+  rdfs:comment "Indique l’objet, l’échantillon ou l’élément constitutif sur lequel un corps étranger est détecté." .
+
+:corpsEtrangerAnalysepar a owl:ObjectProperty ;
+  rdfs:domain :CorpsEtranger ;
+  rdfs:range :InstrumentAnalyse ;
+  rdfs:label "corps étranger analysé par" ;
+  rdfs:comment "corps étranger analysé par l'outil d'analyse" .
+
+:methodeDetectionCorpsEtranger a owl:ObjectProperty ;
+  rdfs:domain :CorpsEtranger ;
+  rdfs:range : AnalysesProposees;
+  rdfs:label "méthode de détection" ;
+  rdfs:comment "Méthode ou technique utilisée pour détecter le corps étranger (ex : MEB-EDS, TOF-SIMS, microscopie optique)." .
+
+
+:typeCorpsEtranger a owl:DatatypeProperty ;
+  rdfs:domain :CorpsEtranger ;
+  rdfs:range xsd:string ;
+  rdfs:label "type de corps étranger" ;
+  rdfs:comment "Nature du corps étranger (ex : métallique, organique, polymère, poussière, fibre)." .
+
+:compositionCorpsEtranger a owl:DatatypeProperty ;
+  rdfs:domain :CorpsEtranger ;
+  rdfs:range xsd:string ;
+  rdfs:label "composition du corps étranger" ;
+  rdfs:comment "Description textuelle ou synthèse de la composition chimique identifiée (ex : Al, Si, C, F)." .
 
 ############################################################
 # PROPRIÉTÉS LITTÉRALES
@@ -233,6 +293,11 @@
   rdfs:range xsd:string ;
   rdfs:label "référence échantillon" .
 
+:descriptionAnalyse a owl:DatatypeProperty ;
+  rdfs:domain :AnalysesProposees ;
+  rdfs:range xsd:string ;
+  rdfs:label "description Analyse" .
+
 :commentaireEchantillon a owl:DatatypeProperty ;
   rdfs:domain :Echantillon ;
   rdfs:range xsd:string ;
@@ -252,6 +317,11 @@
   rdfs:domain :Devis ;
   rdfs:range xsd:string ;
   rdfs:label "version devis" .
+
+:revision a owl:DatatypeProperty ;
+  rdfs:domain :PropositionCommerciale ;
+  rdfs:range xsd:string ;
+  rdfs:label "revision proposition " .
 
 :prixTotal a owl:DatatypeProperty ;
   rdfs:domain :Prix ;
@@ -278,6 +348,16 @@
   rdfs:range xsd:string ;
   rdfs:label "code fournisseur" .
 
+:codedaffaireproposition a owl:DatatypeProperty ;
+  rdfs:domain :PropositionCommerciale ;
+  rdfs:range xsd:string ;
+  rdfs:label "code d'affaire proposition" .
+
+:codedaffaireDevis a owl:DatatypeProperty ;
+  rdfs:domain :Devis ;
+  rdfs:range xsd:string ;
+  rdfs:label "code d'affaire devis" .
+
 :referenceProposition a owl:DatatypeProperty ;
   rdfs:domain :PropositionCommerciale ;
   rdfs:range xsd:string ;
@@ -297,3 +377,10 @@
   rdfs:domain :MultimediaAnnexe ;
   rdfs:range xsd:string ;
   rdfs:label "texte ressource" .
+
+:intituleLivrable a owl:DatatypeProperty ;
+  rdfs:domain :Livrable ;
+  rdfs:range xsd:string ;
+  rdfs:label "intitulé livrable" ;
+  rdfs:comment "Titre court ou type de livrable." .
+
