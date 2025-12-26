@@ -255,11 +255,11 @@
   rdfs:label "corps étranger analysé par" ;
   rdfs:comment "corps étranger analysé par l'outil d'analyse ." .
 
-:methodeDetectionCorpsEtranger a owl:ObjectProperty ;
+:methodeDetectionCorpsEtranger a owl:DatatypeProperty ;
   rdfs:domain :CorpsEtranger ;
-  rdfs:range : AnalysesProposees ;
-  rdfs:label "méthode de détection" ;
-  rdfs:comment "Méthode ou technique utilisée pour détecter le corps étranger (ex : MEB-EDS, TOF-SIMS, microscopie optique)." .
+  rdfs:range xsd:string ;
+  rdfs:label "méthode de détection du corps étranger" ;
+  rdfs:comment "Méthode ou technique utilisée pour détecter le corps étranger (ex : MEB-EDS, ToF-SIMS, microscopie optique)." .
 
 
 :typeCorpsEtranger a owl:DatatypeProperty ;
