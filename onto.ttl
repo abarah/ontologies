@@ -257,7 +257,7 @@
 
 :methodeDetectionCorpsEtranger a owl:ObjectProperty ;
   rdfs:domain :CorpsEtranger ;
-  rdfs:range : AnalysesProposees;
+  rdfs:range :AnalysesProposees ;
   rdfs:label "méthode de détection" ;
   rdfs:comment "Méthode ou technique utilisée pour détecter le corps étranger (ex : MEB-EDS, TOF-SIMS, microscopie optique)." .
 
