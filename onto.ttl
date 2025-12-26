@@ -57,7 +57,7 @@
 
 :InstrumentAnalyse a owl:Class ;
   rdfs:label "Instrument d'analyse" ;
-  rdfs:comment "Instrument ou technique d’analyse (FTIR, MEB, XPS…).".
+  rdfs:comment "Instrument ou technique d’analyse (FTIR, MEB, XPS…)." .
 
 :detailsInstrument a owl:DatatypeProperty ;
   rdfs:domain :InstrumentAnalyse ;
