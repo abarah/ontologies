@@ -8,76 +8,67 @@
 ############################################################
 
 :DocumentClient a owl:Class ;
-  rdfs:subClassOf :Document ;
   rdfs:label "Document client" ;
   rdfs:comment "Document fourni par le client décrivant une demande, une problématique ou un contexte d'analyse." .
+
+:TypeDocumentClient a owl:Class ;
+  rdfs:label "Type de document client" ;
+  rdfs:comment "Document scanné, Formulaire PDF, Email, Fiche d’accompagnement, Bulletin de livraison ou Courrier client." .
+
+:libelleTypeDocumentClient a owl:DatatypeProperty ;
+  rdfs:domain :TypeDocumentClient ;
+  rdfs:range xsd:string ;
+  rdfs:label "libellé type document client" .
+
+:dateDocumentClient a owl:DatatypeProperty ;
+  rdfs:domain :DocumentClient ;
+  rdfs:range xsd:dateTime ;
+  rdfs:label "date document client" .
+
+:lieuDocumentClient a owl:DatatypeProperty ;
+  rdfs:domain :DocumentClient ;
+  rdfs:range xsd:string ;
+  rdfs:label "lieu document client" .
+
+:referenceDocumentClient a owl:DatatypeProperty ;
+  rdfs:domain :DocumentClient ;
+  rdfs:range xsd:string ;
+  rdfs:label "référence document client" .
+
+
+
+############################################################
+# DEVIS
+############################################################
 
 :Devis a owl:Class ;
   rdfs:label "Devis" ;
   rdfs:comment "Document de type devis technique ou commercial." .
 
-:dateDeDevis a owl:DatatypeProperty ;
-  rdfs:domain :Devis ;
-  rdfs:range xsd:dateTime ;
-  rdfs:label "date de devis" .
 
 :versionDevis a owl:DatatypeProperty ;
   rdfs:domain :Devis ;
   rdfs:range xsd:string ;
   rdfs:label "version devis" .
 
+:numeroDevis a owl:DatatypeProperty ;
+  rdfs:domain :Devis ;
+  rdfs:range xsd:string ;
+  rdfs:label "numéro devis" .
+
 :documentConcerneDevis a owl:ObjectProperty ;
   rdfs:domain :DocumentClient ;
   rdfs:range :Devis ;
   rdfs:label "document concerne devis" .
 
-:TypeDocumentClient a owl:Class ;
-  rdfs:label "Type de document client" ;
-  rdfs:comment "Document scanné , Formulaire PDF,Email , Fiche d’accompagnement , Bulletin de livraison ou Courrier client." .
+############################################################
+# CLIENT / CONTACT
+############################################################
 
 :Client a owl:Class ;
   rdfs:label "Client" ;
   rdfs:comment "Organisation ou personne fournissant le document." .
 
-:Problematique a owl:Class ;
-  rdfs:label "Problématique" ;
-  rdfs:comment "Description du problème ou de la question posée par le client." .
-
-:ContenuMultimedia a owl:Class ;
-  rdfs:label "Contenu multimédia" ;
-  rdfs:comment "Contenu non purement textuel associé à un document (image, photo, graphe, spectre)." .
-
-
-:documentFourniPar a owl:ObjectProperty ;
-  rdfs:domain :DocumentClient ;
-  rdfs:range :Client ;
-  rdfs:label "document fourni par" .
-
-:documentDecritProblematique a owl:ObjectProperty ;
-  rdfs:domain :DocumentClient ;
-  rdfs:range :Problematique ;
-  rdfs:label "document décrit problématique" .
-
-:aTypeDocumentClient a owl:ObjectProperty ;
-  rdfs:domain :DocumentClient ;
-  rdfs:range :TypeDocumentClient ;
-  rdfs:label "a pour type de document client" .
-
-:documentContientMedia a owl:ObjectProperty ;
-  rdfs:domain :DocumentClient ;
-  rdfs:range :ContenuMultimedia ;
-  rdfs:label "document contient média" .
-
-:descriptionProblematique a owl:DatatypeProperty ;
-  rdfs:domain :Problematique ;
-  rdfs:range xsd:string ;
-  rdfs:label "description de la problématique" .
-
-:codedaffaireDocumentClient a owl:DatatypeProperty ;
-  rdfs:domain :DocumentClient ;
-  rdfs:range xsd:string ;
-  rdfs:label "code d'affaire document client" .
-  
 :codeClient a owl:DatatypeProperty ;
   rdfs:domain :Client ;
   rdfs:range xsd:string ;
@@ -87,3 +78,81 @@
   rdfs:domain :Client ;
   rdfs:range xsd:string ;
   rdfs:label "numéro client" .
+
+
+:documentFourniPar a owl:ObjectProperty ;
+  rdfs:domain :DocumentClient ;
+  rdfs:range :Client ;
+  rdfs:label "document fourni par" .
+
+############################################################
+# OBJET / DEMANDE
+############################################################
+
+:ObjetdocumentClient a owl:Class ;
+  rdfs:label "Objet document Client" ;
+  rdfs:comment "Objet / demande formulée par le client (texte synthèse du contenu utile)." .
+
+:documentDecritObjet a owl:ObjectProperty ;
+  rdfs:domain :DocumentClient ;
+  rdfs:range :ObjetdocumentClient ;
+  rdfs:label "document décrit Objet" .
+
+:descriptionObjet a owl:DatatypeProperty ;
+  rdfs:domain :ObjetdocumentClient ;
+  rdfs:range xsd:string ;
+  rdfs:label "description d'objet" .
+
+############################################################
+# ANALYSES / DEMANDES D'ANALYSE
+############################################################
+
+:DemandeAnalyse a owl:Class ;
+  rdfs:label "Demande d'analyse" ;
+  rdfs:comment "Demande explicite d'analyses (XPS, ToF-SIMS, etc.) et paramètres." .
+
+:typeAnalyse a owl:DatatypeProperty ;
+  rdfs:domain :DemandeAnalyse ;
+  rdfs:range xsd:string ;
+  rdfs:label "type analyse" .
+
+:detailsDemandeAnalyse a owl:DatatypeProperty ;
+  rdfs:domain :DemandeAnalyse ;
+  rdfs:range xsd:string ;
+  rdfs:label "détails demande analyse" .
+
+:documentDemandeAnalyse a owl:ObjectProperty ;
+  rdfs:domain :DocumentClient ;
+  rdfs:range :DemandeAnalyse ;
+  rdfs:label "document demande analyse" .
+
+
+
+
+############################################################
+# MULTIMEDIA
+############################################################
+
+:ContenuMultimedia a owl:Class ;
+  rdfs:label "Contenu multimédia" ;
+  rdfs:comment "Contenu non purement textuel associé à un document (image, photo, graphe, spectre)." .
+
+
+:documentContientMedia a owl:ObjectProperty ;
+  rdfs:domain :DocumentClient ;
+  rdfs:range :ContenuMultimedia ;
+  rdfs:label "document contient média" .
+
+############################################################
+# METADONNEES EXISTANTES
+############################################################
+
+:codedaffaireDocumentClient a owl:DatatypeProperty ;
+  rdfs:domain :DocumentClient ;
+  rdfs:range xsd:string ;
+  rdfs:label "code d'affaire document client" .
+
+:aTypeDocumentClient a owl:ObjectProperty ;
+  rdfs:domain :DocumentClient ;
+  rdfs:range :TypeDocumentClient ;
+  rdfs:label "a pour type de document client" .
