@@ -1,0 +1,89 @@
+@prefix : <http://data.serma.org/ontodocClient#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+############################################################
+# DOCUMENTS
+############################################################
+
+:DocumentClient a owl:Class ;
+  rdfs:subClassOf :Document ;
+  rdfs:label "Document client" ;
+  rdfs:comment "Document fourni par le client décrivant une demande, une problématique ou un contexte d'analyse." .
+
+:Devis a owl:Class ;
+  rdfs:label "Devis" ;
+  rdfs:comment "Document de type devis technique ou commercial." .
+
+:dateDeDevis a owl:DatatypeProperty ;
+  rdfs:domain :Devis ;
+  rdfs:range xsd:dateTime ;
+  rdfs:label "date de devis" .
+
+:versionDevis a owl:DatatypeProperty ;
+  rdfs:domain :Devis ;
+  rdfs:range xsd:string ;
+  rdfs:label "version devis" .
+
+:documentConcerneDevis a owl:ObjectProperty ;
+  rdfs:domain :DocumentClient ;
+  rdfs:range :Devis ;
+  rdfs:label "document concerne devis" .
+
+:TypeDocumentClient a owl:Class ;
+  rdfs:label "Type de document client" ;
+  rdfs:comment "Document scanné , Formulaire PDF,Email , Fiche d’accompagnement , Bulletin de livraison ou Courrier client." .
+
+:Client a owl:Class ;
+  rdfs:label "Client" ;
+  rdfs:comment "Organisation ou personne fournissant le document." .
+
+:Problematique a owl:Class ;
+  rdfs:label "Problématique" ;
+  rdfs:comment "Description du problème ou de la question posée par le client." .
+
+:ContenuMultimedia a owl:Class ;
+  rdfs:label "Contenu multimédia" ;
+  rdfs:comment "Contenu non purement textuel associé à un document (image, photo, graphe, spectre)." .
+
+
+:documentFourniPar a owl:ObjectProperty ;
+  rdfs:domain :DocumentClient ;
+  rdfs:range :Client ;
+  rdfs:label "document fourni par" .
+
+:documentDecritProblematique a owl:ObjectProperty ;
+  rdfs:domain :DocumentClient ;
+  rdfs:range :Problematique ;
+  rdfs:label "document décrit problématique" .
+
+:aTypeDocumentClient a owl:ObjectProperty ;
+  rdfs:domain :DocumentClient ;
+  rdfs:range :TypeDocumentClient ;
+  rdfs:label "a pour type de document client" .
+
+:documentContientMedia a owl:ObjectProperty ;
+  rdfs:domain :DocumentClient ;
+  rdfs:range :ContenuMultimedia ;
+  rdfs:label "document contient média" .
+
+:descriptionProblematique a owl:DatatypeProperty ;
+  rdfs:domain :Problematique ;
+  rdfs:range xsd:string ;
+  rdfs:label "description de la problématique" .
+
+:codedaffaireDocumentClient a owl:DatatypeProperty ;
+  rdfs:domain :DocumentClient ;
+  rdfs:range xsd:string ;
+  rdfs:label "code d'affaire document client" .
+  
+:codeClient a owl:DatatypeProperty ;
+  rdfs:domain :Client ;
+  rdfs:range xsd:string ;
+  rdfs:label "code client" .
+
+:numeroClient a owl:DatatypeProperty ;
+  rdfs:domain :Client ;
+  rdfs:range xsd:string ;
+  rdfs:label "numéro client" .
