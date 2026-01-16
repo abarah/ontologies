@@ -72,9 +72,9 @@
   rdfs:label "Matériaux" ;
   rdfs:comment "Liste des matériaux ou composants associés à une analyse." .
 
-:ElementsChimiques a owl:Class ;
-  rdfs:label "Éléments chimiques" ;
-  rdfs:comment "Liste des éléments chimiques recherchés ou identifiés." .
+:Specificationsanalytiques a owl:Class ;
+  rdfs:label "Spécifications analytiques" ;
+  rdfs:comment "Les Spécifications analytiques associés à une analyse." .
 
 :ObjetAnalyse a owl:Class ;
   rdfs:label "Objet d'analyse" ;
@@ -85,6 +85,12 @@
   rdfs:range xsd:string ;
   rdfs:label "description objet" ;
   rdfs:comment "Texte descriptif associé à l'objet." .
+
+:detailsspecification a owl:DatatypeProperty ;
+  rdfs:domain :Specificationsanalytiques ;
+  rdfs:range xsd:string ;
+  rdfs:label "détais spécifications analytique" ;
+  rdfs:comment "Texte descriptif associé à les spécifications analytique" .
 
 ############################################################
 # IDENTIFIANTS / COORDONNEES
@@ -129,10 +135,12 @@
   rdfs:range :Materiaux ;
   rdfs:label "utilise matériaux" .
 
-:analyseInclutElementsChimiques a owl:ObjectProperty ;
+
+:analyseinclutspecifications a owl:ObjectProperty ;
   rdfs:domain :AnalysesEffectuees ;
-  rdfs:range :ElementsChimiques ;
-  rdfs:label "analyse inclut éléments chimiques" .
+  rdfs:range :Specificationsanalytiques ;
+  rdfs:label "inclut spécifications" .
+
 
 :corpsEtrangerObserveSur a owl:ObjectProperty ;
   rdfs:domain :CorpsEtranger ;
@@ -144,13 +152,7 @@
   rdfs:domain :CorpsEtranger ;
   rdfs:range :InstrumentAnalyse ;
   rdfs:label "corps étranger analysé par" ;
-  rdfs:comment "corps étranger analysé par l'outil d'analyse" .
-
-:methodeDetectionCorpsEtranger a owl:ObjectProperty ;
-  rdfs:domain :CorpsEtranger ;
-  rdfs:range : AnalysesEffectuees;
-  rdfs:label "méthode de détection" ;
-  rdfs:comment "Méthode ou technique utilisée pour détecter le corps étranger (ex : MEB-EDS, TOF-SIMS, microscopie optique)." .
+  rdfs:comment "corps étranger analysé par l'outil d'analyse." .
 
 
 :typeCorpsEtranger a owl:DatatypeProperty ;
@@ -213,6 +215,12 @@
   rdfs:label "surface correspond à zone d’analyse" ;
   rdfs:comment "Lien entre une surface physique et une zone d’analyse définie pour les analyses." .
 
+
+:decritObjet a owl:ObjectProperty ;
+  rdfs:domain :ObjetAnalyse ;
+  rdfs:range :RapportAnalyse ;
+  rdfs:label "décrit Objet" .
+
 ############################################################
 # ECHANTILLONS
 ############################################################
@@ -221,10 +229,7 @@
   rdfs:label "Échantillon" ;
   rdfs:comment "Échantillon analysé (avec date d'analyse, référence, etc.)." .
 
-:echantillonInclutElementsChimiques a owl:ObjectProperty ;
-  rdfs:domain :Echantillon ;
-  rdfs:range :ElementsChimiques ;
-  rdfs:label "échantillon inclut éléments chimiques" .
+
 
 :dateAnalyse a owl:DatatypeProperty ;
   rdfs:domain :Echantillon ;
