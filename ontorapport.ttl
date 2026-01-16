@@ -148,12 +148,6 @@
   rdfs:label "corps étranger observé sur" ;
   rdfs:comment "Indique l’objet, l’échantillon ou l’élément constitutif sur lequel un corps étranger est détecté." .
 
-:corpsEtrangerAnalysepar a owl:ObjectProperty ;
-  rdfs:domain :CorpsEtranger ;
-  rdfs:range :InstrumentAnalyse ;
-  rdfs:label "corps étranger analysé par" ;
-  rdfs:comment "corps étranger analysé par l'outil d'analyse." .
-
 
 :typeCorpsEtranger a owl:DatatypeProperty ;
   rdfs:domain :CorpsEtranger ;
