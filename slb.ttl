@@ -11,6 +11,10 @@
   rdfs:label "FA Report" ;
   rdfs:comment "Failure analysis report entity (central node)." .
 
+:Client a owl:Class ;
+  rdfs:label "Client" ;
+  rdfs:comment "Client organization associated with the FA report." .
+
 :Part a owl:Class ;
   rdfs:label "Part" ;
   rdfs:comment "Failed part/component referenced by the FA report." .
@@ -44,8 +48,14 @@
   rdfs:comment "Corrective or preventive action recommended in the report." .
 
 #################################################################
-# Object Properties (EN) — clear domain/range, no collisions
+# Object Properties (EN)
 #################################################################
+
+:hasClient a owl:ObjectProperty ;
+  rdfs:label "hasClient" ;
+  rdfs:comment "Links an FA report to the client organization (do not infer 'performed by' from client)." ;
+  rdfs:domain :FAReport ;
+  rdfs:range  :Client .
 
 :hasPart a owl:ObjectProperty ;
   rdfs:label "hasPart" ;
@@ -102,54 +112,30 @@
   rdfs:range  :ExternalStress .
 
 #################################################################
-# Datatype Properties (EN) — FA report metadata & narrative fields
+# Datatype Properties (EN) — FA Report metadata & narrative fields
 #################################################################
 
 :faReportGemsNb a owl:DatatypeProperty ;
   rdfs:label "faReportGemsNb" ;
-  rdfs:comment "GEMS number of the FA report." ;
+  rdfs:comment "GEMS number of the FA report (only if explicitly present in the document)." ;
   rdfs:domain :FAReport ;
   rdfs:range xsd:int .
 
 :faReportGemsRev a owl:DatatypeProperty ;
   rdfs:label "faReportGemsRev" ;
-  rdfs:comment "Revision of the FA report." ;
+  rdfs:comment "Revision of the FA report (only if explicitly present in the document)." ;
   rdfs:domain :FAReport ;
-  rdfs:range xsd:string .
+  rdfs:range xsd:int .
 
 :faReportReleaseDate a owl:DatatypeProperty ;
   rdfs:label "faReportReleaseDate" ;
-  rdfs:comment "Release date of the FA report." ;
-  rdfs:domain :FAReport ;
-  rdfs:range xsd:date .
-
-:failureAnalysisDoneBy a owl:DatatypeProperty ;
-  rdfs:label "failureAnalysisDoneBy" ;
-  rdfs:comment "Person or organization that performed the failure analysis." ;
+  rdfs:comment "Release date or period of the FA report (e.g., '2023-06-01' or 'Q2 2023')." ;
   rdfs:domain :FAReport ;
   rdfs:range xsd:string .
 
 :failureAnalysisObjectClassification a owl:DatatypeProperty ;
   rdfs:label "failureAnalysisObjectClassification" ;
   rdfs:comment "Classification of the analyzed object (e.g., electronic module)." ;
-  rdfs:domain :FAReport ;
-  rdfs:range xsd:string .
-
-:failureMechanismText a owl:DatatypeProperty ;
-  rdfs:label "failureMechanismText" ;
-  rdfs:comment "Failure mechanism described in the report (text form)." ;
-  rdfs:domain :FAReport ;
-  rdfs:range xsd:string .
-
-:rootCauseText a owl:DatatypeProperty ;
-  rdfs:label "rootCauseText" ;
-  rdfs:comment "Root cause described in the report (text form)." ;
-  rdfs:domain :FAReport ;
-  rdfs:range xsd:string .
-
-:externalStressText a owl:DatatypeProperty ;
-  rdfs:label "externalStressText" ;
-  rdfs:comment "External stress described in the report (text form)." ;
   rdfs:domain :FAReport ;
   rdfs:range xsd:string .
 
@@ -163,6 +149,62 @@
   rdfs:label "conclusionText" ;
   rdfs:comment "Conclusion statement extracted from the report (text form)." ;
   rdfs:domain :FAReport ;
+  rdfs:range xsd:string .
+
+:conclusionConfidenceScore a owl:DatatypeProperty ;
+  rdfs:label "conclusionConfidenceScore" ;
+  rdfs:comment "Confidence score (1..10) for the conclusions (only if explicitly stated)." ;
+  rdfs:domain :FAReport ;
+  rdfs:range xsd:int .
+
+#################################################################
+# Datatype Properties (EN) — Root Cause / Failure Mechanism / External Stress
+#################################################################
+
+:rootCauseText a owl:DatatypeProperty ;
+  rdfs:label "rootCauseText" ;
+  rdfs:comment "Root cause description (text evidence)." ;
+  rdfs:domain :RootCause ;
+  rdfs:range xsd:string .
+
+:failureMechanismText a owl:DatatypeProperty ;
+  rdfs:label "failureMechanismText" ;
+  rdfs:comment "Failure mechanism description (text evidence)." ;
+  rdfs:domain :FailureMechanism ;
+  rdfs:range xsd:string .
+
+:externalStressText a owl:DatatypeProperty ;
+  rdfs:label "externalStressText" ;
+  rdfs:comment "External stress description and parameters (temp range, cycles, dwell, etc.)." ;
+  rdfs:domain :ExternalStress ;
+  rdfs:range xsd:string .
+
+#################################################################
+# Datatype Properties (EN) — Test (structured extraction)
+#################################################################
+
+:testId a owl:DatatypeProperty ;
+  rdfs:label "testId" ;
+  rdfs:comment "Test identifier (e.g., T-01, T-02, T-03)." ;
+  rdfs:domain :Test ;
+  rdfs:range xsd:string .
+
+:testName a owl:DatatypeProperty ;
+  rdfs:label "testName" ;
+  rdfs:comment "Short test name/type (e.g., Thermal Cycling, X-Ray Inspection, Functional Test)." ;
+  rdfs:domain :Test ;
+  rdfs:range xsd:string .
+
+:testResult a owl:DatatypeProperty ;
+  rdfs:label "testResult" ;
+  rdfs:comment "Test outcome (e.g., Pass, Fail, Anomaly Detected)." ;
+  rdfs:domain :Test ;
+  rdfs:range xsd:string .
+
+:testConditionsText a owl:DatatypeProperty ;
+  rdfs:label "testConditionsText" ;
+  rdfs:comment "Text description of the test conditions." ;
+  rdfs:domain :Test ;
   rdfs:range xsd:string .
 
 #################################################################
@@ -211,21 +253,21 @@
 
 :pcsReportGemsNb a owl:DatatypeProperty ;
   rdfs:label "pcsReportGemsNb" ;
-  rdfs:comment "GEMS number of the PCS report." ;
+  rdfs:comment "GEMS number of the PCS report (only if explicitly present)." ;
   rdfs:domain :PCS ;
   rdfs:range xsd:int .
 
 :pcsReportGemsRev a owl:DatatypeProperty ;
   rdfs:label "pcsReportGemsRev" ;
-  rdfs:comment "Revision of the PCS report." ;
+  rdfs:comment "Revision of the PCS report (only if explicitly present)." ;
   rdfs:domain :PCS ;
-  rdfs:range xsd:string .
+  rdfs:range xsd:int .
 
 :pcsReportReleaseDate a owl:DatatypeProperty ;
   rdfs:label "pcsReportReleaseDate" ;
-  rdfs:comment "Release date of the PCS report." ;
+  rdfs:comment "Release date or period of the PCS report (e.g., '2023-06-01' or 'Q2 2023')." ;
   rdfs:domain :PCS ;
-  rdfs:range xsd:date .
+  rdfs:range xsd:string .
 
 :problem a owl:DatatypeProperty ;
   rdfs:label "problem" ;
