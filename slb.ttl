@@ -3,176 +3,244 @@
 @prefix rdfs:<http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-
 #################################################################
-# Classes
+# Classes (EN)
 #################################################################
-:FAReportConsumption a owl:Class ;
-  rdfs:label "FA Report"  ;
-  rdfs:comment "Failure analysis report entity (central node)."  .
 
-:PieceDefaillante a owl:Class ;
-  rdfs:label "Part"  ;
-  rdfs:comment "Failed part/component referenced by the FA report."  .
+:FAReport a owl:Class ;
+  rdfs:label "FA Report" ;
+  rdfs:comment "Failure analysis report entity (central node)." .
+
+:Part a owl:Class ;
+  rdfs:label "Part" ;
+  rdfs:comment "Failed part/component referenced by the FA report." .
 
 :PCS a owl:Class ;
-  rdfs:label "PCS"  ;
-  rdfs:comment "PCS report (downstream consumption) linked to the FA report."  .
+  rdfs:label "PCS" ;
+  rdfs:comment "Problem/Cause/Solution consumption report linked to the FA report." .
+
+:Test a owl:Class ;
+  rdfs:label "Test" ;
+  rdfs:comment "Test performed during failure analysis (e.g., thermal cycling, X-ray inspection)." .
+
+:Observation a owl:Class ;
+  rdfs:label "Observation" ;
+  rdfs:comment "Observation made during analysis (microscopy, SEM findings, anomalies, etc.)." .
+
+:FailureMechanism a owl:Class ;
+  rdfs:label "Failure Mechanism" ;
+  rdfs:comment "Failure mechanism (e.g., solder joint fatigue, corrosion, fracture)." .
+
+:RootCause a owl:Class ;
+  rdfs:label "Root Cause" ;
+  rdfs:comment "Root cause stated in the report (e.g., CTE mismatch)." .
+
+:ExternalStress a owl:Class ;
+  rdfs:label "External Stress" ;
+  rdfs:comment "External stress contributing to the failure (thermal cycling, vibration, shock, etc.)." .
+
+:Recommendation a owl:Class ;
+  rdfs:label "Recommendation" ;
+  rdfs:comment "Corrective or preventive action recommended in the report." .
 
 #################################################################
-# Object Properties
+# Object Properties (EN) — clear domain/range, no collisions
 #################################################################
+
 :hasPart a owl:ObjectProperty ;
-  rdfs:label "hasPart"  ;
-  rdfs:comment "Links an FA report to the failed part."  ;
-  rdfs:domain :FAReportConsumption ;
-  rdfs:range  :PieceDefaillante .
+  rdfs:label "hasPart" ;
+  rdfs:comment "Links an FA report to the failed part." ;
+  rdfs:domain :FAReport ;
+  rdfs:range  :Part .
 
 :hasPCS a owl:ObjectProperty ;
-  rdfs:label "hasPCS"  ;
-  rdfs:comment "Links an FA report to a PCS report."  ;
-  rdfs:domain :FAReportConsumption ;
+  rdfs:label "hasPCS" ;
+  rdfs:comment "Links an FA report to a PCS consumption report." ;
+  rdfs:domain :FAReport ;
   rdfs:range  :PCS .
 
+:hasTest a owl:ObjectProperty ;
+  rdfs:label "hasTest" ;
+  rdfs:comment "Links an FA report to a test performed during analysis." ;
+  rdfs:domain :FAReport ;
+  rdfs:range  :Test .
+
+:hasObservation a owl:ObjectProperty ;
+  rdfs:label "hasObservation" ;
+  rdfs:comment "Links an FA report to an observation." ;
+  rdfs:domain :FAReport ;
+  rdfs:range  :Observation .
+
+:hasFailureMechanism a owl:ObjectProperty ;
+  rdfs:label "hasFailureMechanism" ;
+  rdfs:comment "Links an observation to the failure mechanism it supports." ;
+  rdfs:domain :Observation ;
+  rdfs:range  :FailureMechanism .
+
+:hasRootCause a owl:ObjectProperty ;
+  rdfs:label "hasRootCause" ;
+  rdfs:comment "Links an FA report to the stated root cause." ;
+  rdfs:domain :FAReport ;
+  rdfs:range  :RootCause .
+
+:inducedBy a owl:ObjectProperty ;
+  rdfs:label "inducedBy" ;
+  rdfs:comment "Links a failure mechanism to the external stress that induced it." ;
+  rdfs:domain :FailureMechanism ;
+  rdfs:range  :ExternalStress .
+
+:hasRecommendation a owl:ObjectProperty ;
+  rdfs:label "hasRecommendation" ;
+  rdfs:comment "Links an FA report to a recommendation." ;
+  rdfs:domain :FAReport ;
+  rdfs:range  :Recommendation .
+
+:hasExternalStress a owl:ObjectProperty ;
+  rdfs:label "hasExternalStress" ;
+  rdfs:comment "Links a test to the external stress conditions applied." ;
+  rdfs:domain :Test ;
+  rdfs:range  :ExternalStress .
+
 #################################################################
-# Datatype Properties - FA Report
+# Datatype Properties (EN) — FA report metadata & narrative fields
 #################################################################
+
 :faReportGemsNb a owl:DatatypeProperty ;
-  rdfs:label "FA_Report_GEMS_Nb"  ;
-  rdfs:comment "GEMS number of the FA report."  ;
-  rdfs:domain :FAReportConsumption ;
+  rdfs:label "faReportGemsNb" ;
+  rdfs:comment "GEMS number of the FA report." ;
+  rdfs:domain :FAReport ;
   rdfs:range xsd:int .
 
 :faReportGemsRev a owl:DatatypeProperty ;
-  rdfs:label "FA_Report_GEMS_Rev"  ;
-  rdfs:comment "Revision of the FA report."  ;
-  rdfs:domain :FAReportConsumption ;
+  rdfs:label "faReportGemsRev" ;
+  rdfs:comment "Revision of the FA report." ;
+  rdfs:domain :FAReport ;
   rdfs:range xsd:string .
 
 :faReportReleaseDate a owl:DatatypeProperty ;
-  rdfs:label "FA_Report_Release_Date"  ;
-  rdfs:comment "Release date of the FA report."  ;
-  rdfs:domain :FAReportConsumption ;
+  rdfs:label "faReportReleaseDate" ;
+  rdfs:comment "Release date of the FA report." ;
+  rdfs:domain :FAReport ;
   rdfs:range xsd:date .
 
 :failureAnalysisDoneBy a owl:DatatypeProperty ;
-  rdfs:label "Failure_Analysis_Done_By"  ;
-  rdfs:comment "Person or organization that performed the FA."  ;
-  rdfs:domain :FAReportConsumption ;
+  rdfs:label "failureAnalysisDoneBy" ;
+  rdfs:comment "Person or organization that performed the failure analysis." ;
+  rdfs:domain :FAReport ;
   rdfs:range xsd:string .
 
 :failureAnalysisObjectClassification a owl:DatatypeProperty ;
-  rdfs:label "Failure_Analysis_Object_Classification"  ;
-  rdfs:comment "Classification of the analysed object."  ;
-  rdfs:domain :FAReportConsumption ;
+  rdfs:label "failureAnalysisObjectClassification" ;
+  rdfs:comment "Classification of the analyzed object (e.g., electronic module)." ;
+  rdfs:domain :FAReport ;
   rdfs:range xsd:string .
 
-:failureMechanism a owl:DatatypeProperty ;
-  rdfs:label "Failure_Mechanism"  ;
-  rdfs:comment "Failure mechanism described in the report."  ;
-  rdfs:domain :FAReportConsumption ;
+:failureMechanismText a owl:DatatypeProperty ;
+  rdfs:label "failureMechanismText" ;
+  rdfs:comment "Failure mechanism described in the report (text form)." ;
+  rdfs:domain :FAReport ;
   rdfs:range xsd:string .
 
-:failureRootCause a owl:DatatypeProperty ;
-  rdfs:label "Failure_Root_Cause"  ;
-  rdfs:comment "Root cause stated in the report."  ;
-  rdfs:domain :FAReportConsumption ;
+:rootCauseText a owl:DatatypeProperty ;
+  rdfs:label "rootCauseText" ;
+  rdfs:comment "Root cause described in the report (text form)." ;
+  rdfs:domain :FAReport ;
   rdfs:range xsd:string .
 
-:externalStress a owl:DatatypeProperty ;
-  rdfs:label "External_stress"  ;
-  rdfs:comment "External stress factors contributing to the failure."  ;
-  rdfs:domain :FAReportConsumption ;
+:externalStressText a owl:DatatypeProperty ;
+  rdfs:label "externalStressText" ;
+  rdfs:comment "External stress described in the report (text form)." ;
+  rdfs:domain :FAReport ;
   rdfs:range xsd:string .
 
-:recommendations a owl:DatatypeProperty ;
-  rdfs:label "Recommendations"  ;
-  rdfs:comment "Recommendations in the report."  ;
-  rdfs:domain :FAReportConsumption ;
+:recommendationsText a owl:DatatypeProperty ;
+  rdfs:label "recommendationsText" ;
+  rdfs:comment "Recommendations described in the report (text form)." ;
+  rdfs:domain :FAReport ;
   rdfs:range xsd:string .
 
-:conclusionConfidence a owl:DatatypeProperty ;
-  rdfs:label "Conclusion_Confidence"  ;
-  rdfs:comment "Confidence score (1..10) for the conclusions."  ;
-  rdfs:domain :FAReportConsumption ;
-  rdfs:range xsd:int .
+:conclusionText a owl:DatatypeProperty ;
+  rdfs:label "conclusionText" ;
+  rdfs:comment "Conclusion statement extracted from the report (text form)." ;
+  rdfs:domain :FAReport ;
+  rdfs:range xsd:string .
 
 #################################################################
-# Datatype Properties - Part
+# Datatype Properties (EN) — Part
 #################################################################
+
 :failedPartSupplier a owl:DatatypeProperty ;
-  rdfs:label "Failed_Part_Supplier" ;
+  rdfs:label "failedPartSupplier" ;
   rdfs:comment "Supplier of the failed part." ;
-  rdfs:domain :PieceDefaillante ;
+  rdfs:domain :Part ;
   rdfs:range xsd:string .
 
-:failedPartMfrName a owl:DatatypeProperty ;
-  rdfs:label "Failed_Part_Mfr_Name" ;
+:failedPartManufacturerName a owl:DatatypeProperty ;
+  rdfs:label "failedPartManufacturerName" ;
   rdfs:comment "Manufacturer name of the failed part." ;
-  rdfs:domain :PieceDefaillante ;
+  rdfs:domain :Part ;
   rdfs:range xsd:string .
 
 :failedPartReference a owl:DatatypeProperty ;
-  rdfs:label "Failed_Part_Reference" ;
-  rdfs:comment "Reference/PN of the failed part." ;
-  rdfs:domain :PieceDefaillante ;
+  rdfs:label "failedPartReference" ;
+  rdfs:comment "Reference / part number of the failed part." ;
+  rdfs:domain :Part ;
   rdfs:range xsd:string .
 
 :failedPartParentGemsNb a owl:DatatypeProperty ;
-  rdfs:label "Failed_Part_Parent_GEMS_Nb" ;
+  rdfs:label "failedPartParentGemsNb" ;
   rdfs:comment "Parent assembly GEMS number." ;
-  rdfs:domain :PieceDefaillante ;
+  rdfs:domain :Part ;
   rdfs:range xsd:int .
 
 :failedPartFailureLocation a owl:DatatypeProperty ;
-  rdfs:label "Failed_Part_Failure_Location" ;
+  rdfs:label "failedPartFailureLocation" ;
   rdfs:comment "Location of the failure on the part." ;
-  rdfs:domain :PieceDefaillante ;
+  rdfs:domain :Part ;
   rdfs:range xsd:string .
 
 :failedPartFailureDate a owl:DatatypeProperty ;
-  rdfs:label "Failed_Part_Failure_Date" ;
+  rdfs:label "failedPartFailureDate" ;
   rdfs:comment "Date of failure occurrence." ;
-  rdfs:domain :PieceDefaillante ;
+  rdfs:domain :Part ;
   rdfs:range xsd:date .
 
 #################################################################
-# Datatype Properties - PCS
+# Datatype Properties (EN) — PCS consumption fields
 #################################################################
+
 :pcsReportGemsNb a owl:DatatypeProperty ;
-  rdfs:label "PCS_Report_GEMS_Nb" ;
+  rdfs:label "pcsReportGemsNb" ;
   rdfs:comment "GEMS number of the PCS report." ;
   rdfs:domain :PCS ;
   rdfs:range xsd:int .
 
 :pcsReportGemsRev a owl:DatatypeProperty ;
-  rdfs:label "PCS_Report_GEMS_Rev" ;
+  rdfs:label "pcsReportGemsRev" ;
   rdfs:comment "Revision of the PCS report." ;
   rdfs:domain :PCS ;
   rdfs:range xsd:string .
 
 :pcsReportReleaseDate a owl:DatatypeProperty ;
-  rdfs:label "PCS_Report_Release_Date" ;
+  rdfs:label "pcsReportReleaseDate" ;
   rdfs:comment "Release date of the PCS report." ;
   rdfs:domain :PCS ;
   rdfs:range xsd:date .
 
 :problem a owl:DatatypeProperty ;
-  rdfs:label "Problem" ;
-  rdfs:comment "Problem description for PCS consumption.";
+  rdfs:label "problem" ;
+  rdfs:comment "Problem description for PCS consumption." ;
   rdfs:domain :PCS ;
   rdfs:range xsd:string .
 
 :cause a owl:DatatypeProperty ;
-  rdfs:label "Cause" ;
+  rdfs:label "cause" ;
   rdfs:comment "Cause description for PCS consumption." ;
   rdfs:domain :PCS ;
   rdfs:range xsd:string .
 
 :solution a owl:DatatypeProperty ;
-  rdfs:label "Solution" ;
+  rdfs:label "solution" ;
   rdfs:comment "Solution description for PCS consumption." ;
   rdfs:domain :PCS ;
   rdfs:range xsd:string .
-
-
