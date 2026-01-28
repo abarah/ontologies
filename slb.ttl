@@ -1,0 +1,178 @@
+@prefix :    <http://slb.org/faReport#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+#################################################################
+# Classes
+#################################################################
+:FAReportConsumption a owl:Class ;
+  rdfs:label "FA Report"  ;
+  rdfs:comment "Failure analysis report entity (central node)."  .
+
+:PieceDefaillante a owl:Class ;
+  rdfs:label "Part"  ;
+  rdfs:comment "Failed part/component referenced by the FA report."  .
+
+:PCS a owl:Class ;
+  rdfs:label "PCS"  ;
+  rdfs:comment "PCS report (downstream consumption) linked to the FA report."  .
+
+#################################################################
+# Object Properties
+#################################################################
+:hasPart a owl:ObjectProperty ;
+  rdfs:label "hasPart"  ;
+  rdfs:comment "Links an FA report to the failed part."  ;
+  rdfs:domain :FAReportConsumption ;
+  rdfs:range  :PieceDefaillante .
+
+:hasPCS a owl:ObjectProperty ;
+  rdfs:label "hasPCS"  ;
+  rdfs:comment "Links an FA report to a PCS report."  ;
+  rdfs:domain :FAReportConsumption ;
+  rdfs:range  :PCS .
+
+#################################################################
+# Datatype Properties - FA Report
+#################################################################
+:faReportGemsNb a owl:DatatypeProperty ;
+  rdfs:label "FA_Report_GEMS_Nb"  ;
+  rdfs:comment "GEMS number of the FA report."  ;
+  rdfs:domain :FAReportConsumption ;
+  rdfs:range xsd:int .
+
+:faReportGemsRev a owl:DatatypeProperty ;
+  rdfs:label "FA_Report_GEMS_Rev"  ;
+  rdfs:comment "Revision of the FA report."  ;
+  rdfs:domain :FAReportConsumption ;
+  rdfs:range xsd:string .
+
+:faReportReleaseDate a owl:DatatypeProperty ;
+  rdfs:label "FA_Report_Release_Date"  ;
+  rdfs:comment "Release date of the FA report."  ;
+  rdfs:domain :FAReportConsumption ;
+  rdfs:range xsd:date .
+
+:failureAnalysisDoneBy a owl:DatatypeProperty ;
+  rdfs:label "Failure_Analysis_Done_By"  ;
+  rdfs:comment "Person or organization that performed the FA."  ;
+  rdfs:domain :FAReportConsumption ;
+  rdfs:range xsd:string .
+
+:failureAnalysisObjectClassification a owl:DatatypeProperty ;
+  rdfs:label "Failure_Analysis_Object_Classification"  ;
+  rdfs:comment "Classification of the analysed object."  ;
+  rdfs:domain :FAReportConsumption ;
+  rdfs:range xsd:string .
+
+:failureMechanism a owl:DatatypeProperty ;
+  rdfs:label "Failure_Mechanism"  ;
+  rdfs:comment "Failure mechanism described in the report."  ;
+  rdfs:domain :FAReportConsumption ;
+  rdfs:range xsd:string .
+
+:failureRootCause a owl:DatatypeProperty ;
+  rdfs:label "Failure_Root_Cause"  ;
+  rdfs:comment "Root cause stated in the report."  ;
+  rdfs:domain :FAReportConsumption ;
+  rdfs:range xsd:string .
+
+:externalStress a owl:DatatypeProperty ;
+  rdfs:label "External_stress"  ;
+  rdfs:comment "External stress factors contributing to the failure."  ;
+  rdfs:domain :FAReportConsumption ;
+  rdfs:range xsd:string .
+
+:recommendations a owl:DatatypeProperty ;
+  rdfs:label "Recommendations"  ;
+  rdfs:comment "Recommendations in the report."  ;
+  rdfs:domain :FAReportConsumption ;
+  rdfs:range xsd:string .
+
+:conclusionConfidence a owl:DatatypeProperty ;
+  rdfs:label "Conclusion_Confidence"  ;
+  rdfs:comment "Confidence score (1..10) for the conclusions."  ;
+  rdfs:domain :FAReportConsumption ;
+  rdfs:range xsd:int .
+
+#################################################################
+# Datatype Properties - Part
+#################################################################
+:failedPartSupplier a owl:DatatypeProperty ;
+  rdfs:label "Failed_Part_Supplier" ;
+  rdfs:comment "Supplier of the failed part." ;
+  rdfs:domain :PieceDefaillante ;
+  rdfs:range xsd:string .
+
+:failedPartMfrName a owl:DatatypeProperty ;
+  rdfs:label "Failed_Part_Mfr_Name" ;
+  rdfs:comment "Manufacturer name of the failed part." ;
+  rdfs:domain :PieceDefaillante ;
+  rdfs:range xsd:string .
+
+:failedPartReference a owl:DatatypeProperty ;
+  rdfs:label "Failed_Part_Reference" ;
+  rdfs:comment "Reference/PN of the failed part." ;
+  rdfs:domain :PieceDefaillante ;
+  rdfs:range xsd:string .
+
+:failedPartParentGemsNb a owl:DatatypeProperty ;
+  rdfs:label "Failed_Part_Parent_GEMS_Nb" ;
+  rdfs:comment "Parent assembly GEMS number." ;
+  rdfs:domain :PieceDefaillante ;
+  rdfs:range xsd:int .
+
+:failedPartFailureLocation a owl:DatatypeProperty ;
+  rdfs:label "Failed_Part_Failure_Location" ;
+  rdfs:comment "Location of the failure on the part." ;
+  rdfs:domain :PieceDefaillante ;
+  rdfs:range xsd:string .
+
+:failedPartFailureDate a owl:DatatypeProperty ;
+  rdfs:label "Failed_Part_Failure_Date" ;
+  rdfs:comment "Date of failure occurrence." ;
+  rdfs:domain :PieceDefaillante ;
+  rdfs:range xsd:date .
+
+#################################################################
+# Datatype Properties - PCS
+#################################################################
+:pcsReportGemsNb a owl:DatatypeProperty ;
+  rdfs:label "PCS_Report_GEMS_Nb" ;
+  rdfs:comment "GEMS number of the PCS report." ;
+  rdfs:domain :PCS ;
+  rdfs:range xsd:int .
+
+:pcsReportGemsRev a owl:DatatypeProperty ;
+  rdfs:label "PCS_Report_GEMS_Rev" ;
+  rdfs:comment "Revision of the PCS report." ;
+  rdfs:domain :PCS ;
+  rdfs:range xsd:string .
+
+:pcsReportReleaseDate a owl:DatatypeProperty ;
+  rdfs:label "PCS_Report_Release_Date" ;
+  rdfs:comment "Release date of the PCS report." ;
+  rdfs:domain :PCS ;
+  rdfs:range xsd:date .
+
+:problem a owl:DatatypeProperty ;
+  rdfs:label "Problem" ;
+  rdfs:comment "Problem description for PCS consumption.";
+  rdfs:domain :PCS ;
+  rdfs:range xsd:string .
+
+:cause a owl:DatatypeProperty ;
+  rdfs:label "Cause" ;
+  rdfs:comment "Cause description for PCS consumption." ;
+  rdfs:domain :PCS ;
+  rdfs:range xsd:string .
+
+:solution a owl:DatatypeProperty ;
+  rdfs:label "Solution" ;
+  rdfs:comment "Solution description for PCS consumption." ;
+  rdfs:domain :PCS ;
+  rdfs:range xsd:string .
+
+
