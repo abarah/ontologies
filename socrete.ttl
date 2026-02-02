@@ -1,0 +1,469 @@
+@prefix :    <http://socrete.org/normes#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+#################################################################
+# CLASSES — Normes & documents techniques (sans subclasses)
+#################################################################
+
+:DocumentNormatif a owl:Class ;
+  rdfs:label "Document normatif" ;
+  rdfs:comment "Document de référence (norme, guide, recommended practice, spécification, etc.)." .
+
+:Norme a owl:Class ;
+  rdfs:label "Norme" ;
+  rdfs:comment "Standard / norme technique publiée par un organisme." .
+
+:Guide a owl:Class ;
+  rdfs:label "Guide" ;
+  rdfs:comment "Guide technique (guidelines, guide de conception, guide de mise en œuvre)." .
+
+:PratiqueRecommandee a owl:Class ;
+  rdfs:label "Pratique recommandée" ;
+  rdfs:comment "Recommended practice (ex: DNV-RP-...)." .
+
+:RapportTechnique a owl:Class ;
+  rdfs:label "Rapport technique" ;
+  rdfs:comment "Technical report / document de support (TR, report, note technique)." .
+
+:Specification a owl:Class ;
+  rdfs:label "Spécification" ;
+  rdfs:comment "Spécification technique (exigences détaillées, spécification d’essai, etc.)." .
+
+:OrganismeNormalisation a owl:Class ;
+  rdfs:label "Organisme de normalisation" ;
+  rdfs:comment "Organisme/éditeur (ISO, ASTM, ASCE, DNV, NACE, RILEM, AFNOR/NF EN, Eurocode, etc.)." .
+
+:Edition a owl:Class ;
+  rdfs:label "Édition" ;
+  rdfs:comment "Édition/version d’un document (année, amendement, corrigendum)." .
+
+:Section a owl:Class ;
+  rdfs:label "Section" ;
+  rdfs:comment "Section/chapitre/clauses/annexe d’un document." .
+
+:Annexe a owl:Class ;
+  rdfs:label "Annexe" ;
+  rdfs:comment "Annexe (normative ou informative)." .
+
+:Terme a owl:Class ;
+  rdfs:label "Terme" ;
+  rdfs:comment "Terme défini dans le document." .
+
+:Definition a owl:Class ;
+  rdfs:label "Définition" ;
+  rdfs:comment "Définition associée à un terme." .
+
+:Exigence a owl:Class ;
+  rdfs:label "Exigence" ;
+  rdfs:comment "Exigence normative (shall/doit), contrainte, règle, obligation." .
+
+:Recommandation a owl:Class ;
+  rdfs:label "Recommandation" ;
+  rdfs:comment "Recommandation (should/devrait), bonne pratique." .
+
+:MethodeEssai a owl:Class ;
+  rdfs:label "Méthode d’essai" ;
+  rdfs:comment "Méthode/procédure d’essai, protocole, séquence de test." .
+
+:Procedure a owl:Class ;
+  rdfs:label "Procédure" ;
+  rdfs:comment "Procédure opératoire (mise en œuvre, inspection, préparation, etc.)." .
+
+:CritereAcceptation a owl:Class ;
+  rdfs:label "Critère d’acceptation" ;
+  rdfs:comment "Critères de conformité/acceptation (pass/fail, tolérances, seuils)." .
+
+:Parametre a owl:Class ;
+  rdfs:label "Paramètre" ;
+  rdfs:comment "Paramètre technique (température, durée, concentration, charge, etc.)." .
+
+:ValeurLimite a owl:Class ;
+  rdfs:label "Valeur limite" ;
+  rdfs:comment "Seuil/limite/valeur exigée associée à un paramètre." .
+
+:Mesure a owl:Class ;
+  rdfs:label "Mesure" ;
+  rdfs:comment "Mesure/valeur observée (résultat mesuré, indicateur)." .
+
+:Unite a owl:Class ;
+  rdfs:label "Unité" ;
+  rdfs:comment "Unité (SI, unités d’essai, etc.)." .
+
+:Materiau a owl:Class ;
+  rdfs:label "Matériau" ;
+  rdfs:comment "Matériau concerné (acier, béton, polymère, etc.)." .
+
+:Composant a owl:Class ;
+  rdfs:label "Composant" ;
+  rdfs:comment "Composant/élément (barre d’acier, carte PCB, cathode, etc.)." .
+
+:Structure a owl:Class ;
+  rdfs:label "Structure" ;
+  rdfs:comment "Structure/système (ouvrage, équipement, système de protection, etc.)." .
+
+:Environnement a owl:Class ;
+  rdfs:label "Environnement" ;
+  rdfs:comment "Environnement d’exposition (marine, atmosphérique, immersion, etc.)." .
+
+:Formule a owl:Class ;
+  rdfs:label "Formule" ;
+  rdfs:comment "Formule/équation (calcul dimensionnement, critères, etc.)." .
+
+:Figure a owl:Class ;
+  rdfs:label "Figure" ;
+  rdfs:comment "Figure/illustration/diagramme." .
+
+:Tableau a owl:Class ;
+  rdfs:label "Tableau" ;
+  rdfs:comment "Tableau (données, limites, paramètres, classes…)." .
+
+:Reference a owl:Class ;
+  rdfs:label "Référence" ;
+  rdfs:comment "Référence bibliographique ou normative citée." .
+
+:Conformite a owl:Class ;
+  rdfs:label "Conformité" ;
+  rdfs:comment "Déclaration/état de conformité à une exigence." .
+
+#################################################################
+# CLASSES — Gouvernance / consultation (ISO, commentaires, révision)
+#################################################################
+
+:ComiteTechnique a owl:Class ;
+  rdfs:label "Comité technique" ;
+  rdfs:comment "Comité (TC/SC) responsable d’un document/projet." .
+
+:GroupeDeTravail a owl:Class ;
+  rdfs:label "Groupe de travail" ;
+  rdfs:comment "Groupe de travail (WG) rattaché à un comité." .
+
+:ProjetNorme a owl:Class ;
+  rdfs:label "Projet de norme" ;
+  rdfs:comment "Projet (WD/CD/DIS/FDIS) ou document en développement." .
+
+:Consultation a owl:Class ;
+  rdfs:label "Consultation" ;
+  rdfs:comment "Période de consultation/ballot et collecte de commentaires." .
+
+:Commentaire a owl:Class ;
+  rdfs:label "Commentaire" ;
+  rdfs:comment "Commentaire soumis lors d’une consultation sur un projet." .
+
+:ObservationSecretariat a owl:Class ;
+  rdfs:label "Observation du secrétariat" ;
+  rdfs:comment "Observation/retour du secrétariat ou du comité sur un commentaire." .
+
+:PropositionModification a owl:Class ;
+  rdfs:label "Proposition de modification" ;
+  rdfs:comment "Modification proposée (remplacement/suppression/ajout de texte)." .
+
+:Decision a owl:Class ;
+  rdfs:label "Décision" ;
+  rdfs:comment "Décision sur un commentaire (accepté/rejeté/à étudier…)." .
+
+:MembreNational a owl:Class ;
+  rdfs:label "Membre national" ;
+  rdfs:comment "National committee / member body auteur de commentaires." .
+
+#################################################################
+# OBJECT PROPERTIES — Structure & contenu
+#################################################################
+
+:publiePar a owl:ObjectProperty ;
+  rdfs:label "publiePar" ;
+  rdfs:domain :DocumentNormatif ;
+  rdfs:range  :OrganismeNormalisation .
+
+:aEdition a owl:ObjectProperty ;
+  rdfs:label "aEdition" ;
+  rdfs:domain :DocumentNormatif ;
+  rdfs:range  :Edition .
+
+:aSection a owl:ObjectProperty ;
+  rdfs:label "aSection" ;
+  rdfs:domain :DocumentNormatif ;
+  rdfs:range  :Section .
+
+:aAnnexe a owl:ObjectProperty ;
+  rdfs:label "aAnnexe" ;
+  rdfs:domain :DocumentNormatif ;
+  rdfs:range  :Annexe .
+
+:contientExigence a owl:ObjectProperty ;
+  rdfs:label "contientExigence" ;
+  rdfs:domain :Section ;
+  rdfs:range  :Exigence .
+
+:contientRecommandation a owl:ObjectProperty ;
+  rdfs:label "contientRecommandation" ;
+  rdfs:domain :Section ;
+  rdfs:range  :Recommandation .
+
+:definitTerme a owl:ObjectProperty ;
+  rdfs:label "definitTerme" ;
+  rdfs:domain :DocumentNormatif ;
+  rdfs:range  :Terme .
+
+:aDefinition a owl:ObjectProperty ;
+  rdfs:label "aDefinition" ;
+  rdfs:domain :Terme ;
+  rdfs:range  :Definition .
+
+:prescritMethodeEssai a owl:ObjectProperty ;
+  rdfs:label "prescritMethodeEssai" ;
+  rdfs:domain :Exigence ;
+  rdfs:range  :MethodeEssai .
+
+:specifieProcedure a owl:ObjectProperty ;
+  rdfs:label "specifieProcedure" ;
+  rdfs:domain :Section ;
+  rdfs:range  :Procedure .
+
+:aCritereAcceptation a owl:ObjectProperty ;
+  rdfs:label "aCritereAcceptation" ;
+  rdfs:domain :MethodeEssai ;
+  rdfs:range  :CritereAcceptation .
+
+:utiliseParametre a owl:ObjectProperty ;
+  rdfs:label "utiliseParametre" ;
+  rdfs:domain :MethodeEssai ;
+  rdfs:range  :Parametre .
+
+:aValeurLimite a owl:ObjectProperty ;
+  rdfs:label "aValeurLimite" ;
+  rdfs:domain :Parametre ;
+  rdfs:range  :ValeurLimite .
+
+:mesureAssociee a owl:ObjectProperty ;
+  rdfs:label "mesureAssociee" ;
+  rdfs:domain :MethodeEssai ;
+  rdfs:range  :Mesure .
+
+:utiliseUnite a owl:ObjectProperty ;
+  rdfs:label "utiliseUnite" ;
+  rdfs:domain :ValeurLimite ;
+  rdfs:range  :Unite .
+
+:appliqueAComposant a owl:ObjectProperty ;
+  rdfs:label "appliqueAComposant" ;
+  rdfs:domain :Exigence ;
+  rdfs:range  :Composant .
+
+:appliqueAMateriau a owl:ObjectProperty ;
+  rdfs:label "appliqueAMateriau" ;
+  rdfs:domain :Exigence ;
+  rdfs:range  :Materiau .
+
+:appliqueAStructure a owl:ObjectProperty ;
+  rdfs:label "appliqueAStructure" ;
+  rdfs:domain :Exigence ;
+  rdfs:range  :Structure .
+
+:appliqueAEnvironnement a owl:ObjectProperty ;
+  rdfs:label "appliqueAEnvironnement" ;
+  rdfs:domain :Exigence ;
+  rdfs:range  :Environnement .
+
+:contientFormule a owl:ObjectProperty ;
+  rdfs:label "contientFormule" ;
+  rdfs:domain :Section ;
+  rdfs:range  :Formule .
+
+:contientFigure a owl:ObjectProperty ;
+  rdfs:label "contientFigure" ;
+  rdfs:domain :Section ;
+  rdfs:range  :Figure .
+
+:contientTableau a owl:ObjectProperty ;
+  rdfs:label "contientTableau" ;
+  rdfs:domain :Section ;
+  rdfs:range  :Tableau .
+
+:citeReference a owl:ObjectProperty ;
+  rdfs:label "citeReference" ;
+  rdfs:domain :DocumentNormatif ;
+  rdfs:range  :Reference .
+
+:remplaceDocument a owl:ObjectProperty ;
+  rdfs:label "remplaceDocument" ;
+  rdfs:domain :Edition ;
+  rdfs:range  :DocumentNormatif .
+
+#################################################################
+# OBJECT PROPERTIES — Gouvernance / consultation
+#################################################################
+
+:documentGereParComite a owl:ObjectProperty ;
+  rdfs:label "documentGereParComite" ;
+  rdfs:domain :DocumentNormatif ;
+  rdfs:range  :ComiteTechnique .
+
+:comiteContientGroupe a owl:ObjectProperty ;
+  rdfs:label "comiteContientGroupe" ;
+  rdfs:domain :ComiteTechnique ;
+  rdfs:range  :GroupeDeTravail .
+
+:documentConcerneProjet a owl:ObjectProperty ;
+  rdfs:label "documentConcerneProjet" ;
+  rdfs:domain :DocumentNormatif ;
+  rdfs:range  :ProjetNorme .
+
+:projetAConsultation a owl:ObjectProperty ;
+  rdfs:label "projetAConsultation" ;
+  rdfs:domain :ProjetNorme ;
+  rdfs:range  :Consultation .
+
+:consultationContientCommentaire a owl:ObjectProperty ;
+  rdfs:label "consultationContientCommentaire" ;
+  rdfs:domain :Consultation ;
+  rdfs:range  :Commentaire .
+
+:commentaireSoumisPar a owl:ObjectProperty ;
+  rdfs:label "commentaireSoumisPar" ;
+  rdfs:domain :Commentaire ;
+  rdfs:range  :MembreNational .
+
+:commentaireSurSection a owl:ObjectProperty ;
+  rdfs:label "commentaireSurSection" ;
+  rdfs:domain :Commentaire ;
+  rdfs:range  :Section .
+
+:commentaireProposeModification a owl:ObjectProperty ;
+  rdfs:label "commentaireProposeModification" ;
+  rdfs:domain :Commentaire ;
+  rdfs:range  :PropositionModification .
+
+:commentaireAObservationSecretariat a owl:ObjectProperty ;
+  rdfs:label "commentaireAObservationSecretariat" ;
+  rdfs:domain :Commentaire ;
+  rdfs:range  :ObservationSecretariat .
+
+:commentaireAUneDecision a owl:ObjectProperty ;
+  rdfs:label "commentaireAUneDecision" ;
+  rdfs:domain :Commentaire ;
+  rdfs:range  :Decision .
+
+#################################################################
+# DATATYPE PROPERTIES — Métadonnées document
+#################################################################
+
+:titre a owl:DatatypeProperty ;
+  rdfs:label "titre" ;
+  rdfs:domain :DocumentNormatif ;
+  rdfs:range xsd:string .
+
+:identifiant a owl:DatatypeProperty ;
+  rdfs:label "identifiant" ;
+  rdfs:comment "Code du document (ex: ISO 5929, DNV-RP-B401, ASTM Gxx, EN 199x...)." ;
+  rdfs:domain :DocumentNormatif ;
+  rdfs:range xsd:string .
+
+:langue a owl:DatatypeProperty ;
+  rdfs:label "langue" ;
+  rdfs:domain :DocumentNormatif ;
+  rdfs:range xsd:string .
+
+:datePublication a owl:DatatypeProperty ;
+  rdfs:label "datePublication" ;
+  rdfs:domain :Edition ;
+  rdfs:range xsd:string .
+
+:version a owl:DatatypeProperty ;
+  rdfs:label "version" ;
+  rdfs:comment "Édition, année, amendement, révision, etc." ;
+  rdfs:domain :Edition ;
+  rdfs:range xsd:string .
+
+:statut a owl:DatatypeProperty ;
+  rdfs:label "statut" ;
+  rdfs:comment "Publié / projet (CD/DIS/FDIS) / retiré / remplacé..." ;
+  rdfs:domain :DocumentNormatif ;
+  rdfs:range xsd:string .
+
+:domaineTechnique a owl:DatatypeProperty ;
+  rdfs:label "domaineTechnique" ;
+  rdfs:domain :DocumentNormatif ;
+  rdfs:range xsd:string .
+
+:resume a owl:DatatypeProperty ;
+  rdfs:label "resume" ;
+  rdfs:domain :DocumentNormatif ;
+  rdfs:range xsd:string .
+
+#################################################################
+# DATATYPE PROPERTIES — Contenu (léger, pour QA)
+#################################################################
+
+:texteSection a owl:DatatypeProperty ;
+  rdfs:label "texteSection" ;
+  rdfs:domain :Section ;
+  rdfs:range xsd:string .
+
+:texteExigence a owl:DatatypeProperty ;
+  rdfs:label "texteExigence" ;
+  rdfs:domain :Exigence ;
+  rdfs:range xsd:string .
+
+:texteMethodeEssai a owl:DatatypeProperty ;
+  rdfs:label "texteMethodeEssai" ;
+  rdfs:domain :MethodeEssai ;
+  rdfs:range xsd:string .
+
+:texteCritereAcceptation a owl:DatatypeProperty ;
+  rdfs:label "texteCritereAcceptation" ;
+  rdfs:domain :CritereAcceptation ;
+  rdfs:range xsd:string .
+
+:texteFormule a owl:DatatypeProperty ;
+  rdfs:label "texteFormule" ;
+  rdfs:domain :Formule ;
+  rdfs:range xsd:string .
+
+#################################################################
+# DATATYPE PROPERTIES — Gouvernance/consultation
+#################################################################
+
+:codeComite a owl:DatatypeProperty ;
+  rdfs:label "codeComite" ;
+  rdfs:domain :ComiteTechnique ;
+  rdfs:range xsd:string .
+
+:codeGroupe a owl:DatatypeProperty ;
+  rdfs:label "codeGroupe" ;
+  rdfs:domain :GroupeDeTravail ;
+  rdfs:range xsd:string .
+
+:codeProjet a owl:DatatypeProperty ;
+  rdfs:label "codeProjet" ;
+  rdfs:comment "Ex: ISO/CD 5929" ;
+  rdfs:domain :ProjetNorme ;
+  rdfs:range xsd:string .
+
+:texteCommentaire a owl:DatatypeProperty ;
+  rdfs:label "texteCommentaire" ;
+  rdfs:domain :Commentaire ;
+  rdfs:range xsd:string .
+
+:texteObservationSecretariat a owl:DatatypeProperty ;
+  rdfs:label "texteObservationSecretariat" ;
+  rdfs:domain :ObservationSecretariat ;
+  rdfs:range xsd:string .
+
+:texteModificationProposee a owl:DatatypeProperty ;
+  rdfs:label "texteModificationProposee" ;
+  rdfs:domain :PropositionModification ;
+  rdfs:range xsd:string .
+
+:statutDecision a owl:DatatypeProperty ;
+  rdfs:label "statutDecision" ;
+  rdfs:comment "accepté / rejeté / à étudier / partiel..." ;
+  rdfs:domain :Decision ;
+  rdfs:range xsd:string .
+
+:codeMembreNational a owl:DatatypeProperty ;
+  rdfs:label "codeMembreNational" ;
+  rdfs:comment "Ex: MB/NC1" ;
+  rdfs:domain :MembreNational ;
+  rdfs:range xsd:string .
