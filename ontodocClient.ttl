@@ -1,158 +1,215 @@
-@prefix : <http://data.serma.org/ontodocClient#> .
+@prefix <http://data.serma.org/ontodocClient#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdfs:<http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-############################################################
-# DOCUMENTS
-############################################################
+#################################################################
+# Classes — Documents Client (FR)
+#################################################################
 
 :DocumentClient a owl:Class ;
   rdfs:label "Document client" ;
-  rdfs:comment "Document fourni par le client décrivant une demande, une problématique ou un contexte d'analyse." .
-
-:TypeDocumentClient a owl:Class ;
-  rdfs:label "Type de document client" ;
-  rdfs:comment "Document scanné, Formulaire PDF, Email, Fiche d’accompagnement, Bulletin de livraison ou Courrier client." .
-
-:libelleTypeDocumentClient a owl:DatatypeProperty ;
-  rdfs:domain :TypeDocumentClient ;
-  rdfs:range xsd:string ;
-  rdfs:label "libellé type document client" .
-
-:dateDocumentClient a owl:DatatypeProperty ;
-  rdfs:domain :DocumentClient ;
-  rdfs:range xsd:dateTime ;
-  rdfs:label "date document client" .
-
-:lieuDocumentClient a owl:DatatypeProperty ;
-  rdfs:domain :DocumentClient ;
-  rdfs:range xsd:string ;
-  rdfs:label "lieu document client" .
-
-:referenceDocumentClient a owl:DatatypeProperty ;
-  rdfs:domain :DocumentClient ;
-  rdfs:range xsd:string ;
-  rdfs:label "référence document client" .
-
-
-
-############################################################
-# DEVIS
-############################################################
-
-:Devis a owl:Class ;
-  rdfs:label "Devis" ;
-  rdfs:comment "Document de type devis technique ou commercial." .
-
-
-:versionDevis a owl:DatatypeProperty ;
-  rdfs:domain :Devis ;
-  rdfs:range xsd:string ;
-  rdfs:label "version devis" .
-
-:numeroDevis a owl:DatatypeProperty ;
-  rdfs:domain :Devis ;
-  rdfs:range xsd:string ;
-  rdfs:label "numéro devis" .
-
-:documentConcerneDevis a owl:ObjectProperty ;
-  rdfs:domain :DocumentClient ;
-  rdfs:range :Devis ;
-  rdfs:label "document concerne devis" .
-
-############################################################
-# CLIENT / CONTACT
-############################################################
+  rdfs:comment "Document fourni par un client pour initier une demande (demande d'analyse, bon d'envoi, etc.)." .
 
 :Client a owl:Class ;
-  rdfs:label "Client" ;
-  rdfs:comment "Organisation ou personne fournissant le document." .
+  rdfs:label "Client" .
 
-:codeClient a owl:DatatypeProperty ;
-  rdfs:domain :Client ;
-  rdfs:range xsd:string ;
-  rdfs:label "code client" .
-
-:numeroClient a owl:DatatypeProperty ;
-  rdfs:domain :Client ;
-  rdfs:range xsd:string ;
-  rdfs:label "numéro client" .
-
-
-:documentFourniPar a owl:ObjectProperty ;
-  rdfs:domain :DocumentClient ;
-  rdfs:range :Client ;
-  rdfs:label "document fourni par" .
-
-############################################################
-# OBJET / DEMANDE
-############################################################
-
-:ObjetdocumentClient a owl:Class ;
-  rdfs:label "Objet document Client" ;
-  rdfs:comment "Objet / demande formulée par le client (texte synthèse du contenu utile)." .
-
-:documentDecritObjet a owl:ObjectProperty ;
-  rdfs:domain :DocumentClient ;
-  rdfs:range :ObjetdocumentClient ;
-  rdfs:label "document décrit Objet" .
-
-:descriptionObjet a owl:DatatypeProperty ;
-  rdfs:domain :ObjetdocumentClient ;
-  rdfs:range xsd:string ;
-  rdfs:label "description d'objet" .
-
-############################################################
-# ANALYSES / DEMANDES D'ANALYSE
-############################################################
+:Prestataire a owl:Class ;
+  rdfs:label "Prestataire" ;
+  rdfs:comment "Laboratoire ou société réalisant les analyses." .
 
 :DemandeAnalyse a owl:Class ;
-  rdfs:label "Demande d'analyse" ;
-  rdfs:comment "Demande explicite d'analyses (XPS, ToF-SIMS, etc.) et paramètres." .
+  rdfs:label "Demande d'analyse" .
 
-:typeAnalyse a owl:DatatypeProperty ;
+:Problematique a owl:Class ;
+  rdfs:label "Problématique" ;
+  rdfs:comment "Description du problème / motivation de la demande (info la plus importante)." .
+
+:Echantillon a owl:Class ;
+  rdfs:label "Échantillon" .
+
+:EtatEchantillon a owl:Class ;
+  rdfs:label "État de l'échantillon" .
+
+:Materiau a owl:Class ;
+  rdfs:label "Matériau" .
+
+:Lot a owl:Class ;
+  rdfs:label "Lot" .
+
+:PlanAnalyse a owl:Class ;
+  rdfs:label "Plan d'analyse" .
+
+:AnalyseDemandee a owl:Class ;
+  rdfs:label "Analyse demandée" .
+
+:TechniqueAnalyse a owl:Class ;
+  rdfs:label "Technique d'analyse" .
+
+:ZoneAnalyse a owl:Class ;
+  rdfs:label "Zone d'analyse" .
+
+:LivrableAttendu a owl:Class ;
+  rdfs:label "Livrable attendu" .
+
+:ReferenceCommerciale a owl:Class ;
+  rdfs:label "Référence commerciale" ;
+  rdfs:comment "Devis, commande, référence interne…" .
+
+:Expedition a owl:Class ;
+  rdfs:label "Expédition" ;
+  rdfs:comment "Informations d'envoi/réception (transport, date, colis, etc.)." .
+
+#################################################################
+# Object Properties — Relations (IDs stables + labels FR)
+#################################################################
+
+:aPourClient a owl:ObjectProperty ;
+  rdfs:label "aPourClient" ;
+  rdfs:domain :DocumentClient ;
+  rdfs:range  :Client .
+
+:aPourPrestataire a owl:ObjectProperty ;
+  rdfs:label "aPourPrestataire" ;
+  rdfs:domain :DocumentClient ;
+  rdfs:range  :Prestataire .
+
+:decritDemande a owl:ObjectProperty ;
+  rdfs:label "decritDemande" ;
+  rdfs:domain :DocumentClient ;
+  rdfs:range  :DemandeAnalyse .
+
+:aPourProblematique a owl:ObjectProperty ;
+  rdfs:label "aPourProblematique" ;
   rdfs:domain :DemandeAnalyse ;
-  rdfs:range xsd:string ;
-  rdfs:label "type analyse" .
+  rdfs:range  :Problematique .
 
-:detailsDemandeAnalyse a owl:DatatypeProperty ;
+:inclutEchantillon a owl:ObjectProperty ;
+  rdfs:label "inclutEchantillon" ;
   rdfs:domain :DemandeAnalyse ;
-  rdfs:range xsd:string ;
-  rdfs:label "détails demande analyse" .
+  rdfs:range  :Echantillon .
 
-:documentDemandeAnalyse a owl:ObjectProperty ;
+:aPourEtat a owl:ObjectProperty ;
+  rdfs:label "aPourEtat" ;
+  rdfs:domain :Echantillon ;
+  rdfs:range  :EtatEchantillon .
+
+:aPourMateriau a owl:ObjectProperty ;
+  rdfs:label "aPourMateriau" ;
+  rdfs:domain :Echantillon ;
+  rdfs:range  :Materiau .
+
+:associeLot a owl:ObjectProperty ;
+  rdfs:label "associeLot" ;
+  rdfs:comment "Lien souple pour gérer la variabilité (lot côté demande ou côté échantillon)." ;
+  rdfs:domain :DemandeAnalyse ;
+  rdfs:range  :Lot .
+
+:aPourPlanAnalyse a owl:ObjectProperty ;
+  rdfs:label "aPourPlanAnalyse" ;
+  rdfs:domain :DemandeAnalyse ;
+  rdfs:range  :PlanAnalyse .
+
+:inclutAnalyse a owl:ObjectProperty ;
+  rdfs:label "inclutAnalyse" ;
+  rdfs:domain :PlanAnalyse ;
+  rdfs:range  :AnalyseDemandee .
+
+:utiliseTechnique a owl:ObjectProperty ;
+  rdfs:label "utiliseTechnique" ;
+  rdfs:domain :AnalyseDemandee ;
+  rdfs:range  :TechniqueAnalyse .
+
+:cibleEchantillon a owl:ObjectProperty ;
+  rdfs:label "cibleEchantillon" ;
+  rdfs:domain :AnalyseDemandee ;
+  rdfs:range  :Echantillon .
+
+:cibleZone a owl:ObjectProperty ;
+  rdfs:label "cibleZone" ;
+  rdfs:domain :AnalyseDemandee ;
+  rdfs:range  :ZoneAnalyse .
+
+:attendLivrable a owl:ObjectProperty ;
+  rdfs:label "attendLivrable" ;
+  rdfs:domain :DemandeAnalyse ;
+  rdfs:range  :LivrableAttendu .
+
+:aPourReferenceCommerciale a owl:ObjectProperty ;
+  rdfs:label "aPourReferenceCommerciale" ;
   rdfs:domain :DocumentClient ;
-  rdfs:range :DemandeAnalyse ;
-  rdfs:label "document demande analyse" .
+  rdfs:range  :ReferenceCommerciale .
 
-
-
-
-############################################################
-# MULTIMEDIA
-############################################################
-
-:ContenuMultimedia a owl:Class ;
-  rdfs:label "Contenu multimédia" ;
-  rdfs:comment "Contenu non purement textuel associé à un document (image, photo, graphe, spectre)." .
-
-
-:documentContientMedia a owl:ObjectProperty ;
+:aPourExpedition a owl:ObjectProperty ;
+  rdfs:label "aPourExpedition" ;
   rdfs:domain :DocumentClient ;
-  rdfs:range :ContenuMultimedia ;
-  rdfs:label "document contient média" .
+  rdfs:range  :Expedition .
 
-############################################################
-# METADONNEES EXISTANTES
-############################################################
+#################################################################
+# Datatype Properties — Champs clés (focus problématique)
+#################################################################
 
-:codedaffaireDocumentClient a owl:DatatypeProperty ;
+:typeDocument a owl:DatatypeProperty ;
+  rdfs:label "typeDocument" ;
   rdfs:domain :DocumentClient ;
-  rdfs:range xsd:string ;
-  rdfs:label "code d'affaire document client" .
+  rdfs:range xsd:string .
 
-:aTypeDocumentClient a owl:ObjectProperty ;
+:numeroDocument a owl:DatatypeProperty ;
+  rdfs:label "numeroDocument" ;
   rdfs:domain :DocumentClient ;
-  rdfs:range :TypeDocumentClient ;
-  rdfs:label "a pour type de document client" .
+  rdfs:range xsd:string .
+
+:dateDocument a owl:DatatypeProperty ;
+  rdfs:label "dateDocument" ;
+  rdfs:domain :DocumentClient ;
+  rdfs:range xsd:string .
+
+:descriptionDemande a owl:DatatypeProperty ;
+  rdfs:label "descriptionDemande" ;
+  rdfs:domain :DemandeAnalyse ;
+  rdfs:range xsd:string .
+
+:texteProblematique a owl:DatatypeProperty ;
+  rdfs:label "texteProblematique" ;
+  rdfs:domain :Problematique ;
+  rdfs:range xsd:string .
+
+:nomEchantillon a owl:DatatypeProperty ;
+  rdfs:label "nomEchantillon" ;
+  rdfs:domain :Echantillon ;
+  rdfs:range xsd:string .
+
+:quantiteEchantillon a owl:DatatypeProperty ;
+  rdfs:label "quantiteEchantillon" ;
+  rdfs:domain :Echantillon ;
+  rdfs:range xsd:int .
+
+:nombreRepetitions a owl:DatatypeProperty ;
+  rdfs:label "nombreRepetitions" ;
+  rdfs:domain :AnalyseDemandee ;
+  rdfs:range xsd:int .
+
+:commentairePlan a owl:DatatypeProperty ;
+  rdfs:label "commentairePlan" ;
+  rdfs:domain :PlanAnalyse ;
+  rdfs:range xsd:string .
+
+:descriptionLivrable a owl:DatatypeProperty ;
+  rdfs:label "descriptionLivrable" ;
+  rdfs:domain :LivrableAttendu ;
+  rdfs:range xsd:string .
+
+:numeroDevis a owl:DatatypeProperty ;
+  rdfs:label "numeroDevis" ;
+  rdfs:domain :ReferenceCommerciale ;
+  rdfs:range xsd:string .
+
+:numeroCommande a owl:DatatypeProperty ;
+  rdfs:label "numeroCommande" ;
+  rdfs:domain :ReferenceCommerciale ;
+  rdfs:range xsd:string .
+
+:referenceInterne a owl:DatatypeProperty ;
+  rdfs:label "referenceInterne" ;
+  rdfs:domain :ReferenceCommerciale ;
+  rdfs:range xsd:string .
