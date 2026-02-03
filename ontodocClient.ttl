@@ -1,7 +1,8 @@
 @prefix : <http://data.serma.org/ontodocClient#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdfs:<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
 
 #################################################################
 # Classes — Documents Client (FR)
@@ -9,207 +10,237 @@
 
 :DocumentClient a owl:Class ;
   rdfs:label "Document client" ;
-  rdfs:comment "Document fourni par un client pour initier une demande (demande d'analyse, bon d'envoi, etc.)." .
+  rdfs:comment "Document fourni par un client pour initier une demande (bulletin de livraison, demande d'analyse, etc.)." .
 
-:Client a owl:Class ;
-  rdfs:label "Client" .
+:OrganisationCliente a owl:Class ;
+  rdfs:label "Organisation cliente" ;
+  rdfs:comment "Entreprise cliente à l'origine de la demande." .
 
-:Prestataire a owl:Class ;
-  rdfs:label "Prestataire" ;
+:PrestataireAnalyse a owl:Class ;
+  rdfs:label "Prestataire d'analyse" ;
   rdfs:comment "Laboratoire ou société réalisant les analyses." .
 
+:PersonneContact a owl:Class ;
+  rdfs:label "Personne de contact" ;
+  rdfs:comment "Personne mentionnée dans le document (demandeur, destinataire, contact)." .
+
 :DemandeAnalyse a owl:Class ;
-  rdfs:label "Demande d'analyse" .
+  rdfs:label "Demande d'analyse" ;
+  rdfs:comment "Demande globale formulée par le client." .
 
 :Problematique a owl:Class ;
   rdfs:label "Problématique" ;
-  rdfs:comment "Description du problème / motivation de la demande (info la plus importante)." .
+  rdfs:comment "Description du problème ou de la motivation de la demande." .
 
 :Echantillon a owl:Class ;
-  rdfs:label "Échantillon" .
+  rdfs:label "Échantillon" ;
+  rdfs:comment "Échantillon physique envoyé pour analyse." .
 
 :EtatEchantillon a owl:Class ;
-  rdfs:label "État de l'échantillon" .
+  rdfs:label "État de l'échantillon" ;
+  rdfs:comment "État ou condition de l'échantillon (avec tache, neuf, production, etc.)." .
 
 :Materiau a owl:Class ;
-  rdfs:label "Matériau" .
+  rdfs:label "Matériau" ;
+  rdfs:comment "Matériau ou alliage associé à l'échantillon." .
 
 :Lot a owl:Class ;
-  rdfs:label "Lot" .
+  rdfs:label "Lot" ;
+  rdfs:comment "Lot ou regroupement d'analyses/échantillons." .
 
 :PlanAnalyse a owl:Class ;
-  rdfs:label "Plan d'analyse" .
+  rdfs:label "Plan d'analyse" ;
+  rdfs:comment "Organisation des analyses demandées (ordre, conditions, répétitions)." .
 
 :AnalyseDemandee a owl:Class ;
-  rdfs:label "Analyse demandée" .
+  rdfs:label "Analyse demandée" ;
+  rdfs:comment "Analyse spécifique demandée par le client." .
 
 :TechniqueAnalyse a owl:Class ;
-  rdfs:label "Technique d'analyse" .
+  rdfs:label "Technique d'analyse" ;
+  rdfs:comment "Technique analytique demandée (XPS, ToF-SIMS, etc.)." .
 
 :ZoneAnalyse a owl:Class ;
-  rdfs:label "Zone d'analyse" .
+  rdfs:label "Zone d'analyse" ;
+  rdfs:comment "Zone ciblée sur l'échantillon (zone tachée, zone saine, surface, etc.)." .
 
 :LivrableAttendu a owl:Class ;
-  rdfs:label "Livrable attendu" .
+  rdfs:label "Livrable attendu" ;
+  rdfs:comment "Résultat ou restitution attendue par le client." .
 
 :ReferenceCommerciale a owl:Class ;
   rdfs:label "Référence commerciale" ;
-  rdfs:comment "Devis, commande, référence interne…" .
+  rdfs:comment "Références commerciales associées (devis, commande, référence interne)." .
 
 :Expedition a owl:Class ;
   rdfs:label "Expédition" ;
-  rdfs:comment "Informations d'envoi/réception (transport, date, colis, etc.)." .
+  rdfs:comment "Informations liées à l'envoi des échantillons." .
+
+
 
 #################################################################
-# Object Properties — Relations (IDs stables + labels FR)
+# Object Properties — Relations
 #################################################################
 
 :aPourClient a owl:ObjectProperty ;
-  rdfs:label "aPourClient" ;
+  rdfs:label "a pour client" ;
   rdfs:domain :DocumentClient ;
-  rdfs:range  :Client .
+  rdfs:range  :OrganisationCliente .
 
 :aPourPrestataire a owl:ObjectProperty ;
-  rdfs:label "aPourPrestataire" ;
+  rdfs:label "a pour prestataire" ;
   rdfs:domain :DocumentClient ;
-  rdfs:range  :Prestataire .
+  rdfs:range  :PrestataireAnalyse .
+
+:aPourContact a owl:ObjectProperty ;
+  rdfs:label "a pour contact" ;
+  rdfs:domain :DocumentClient ;
+  rdfs:range  :PersonneContact .
 
 :decritDemande a owl:ObjectProperty ;
-  rdfs:label "decritDemande" ;
+  rdfs:label "décrit la demande" ;
   rdfs:domain :DocumentClient ;
   rdfs:range  :DemandeAnalyse .
 
 :aPourProblematique a owl:ObjectProperty ;
-  rdfs:label "aPourProblematique" ;
+  rdfs:label "a pour problématique" ;
   rdfs:domain :DemandeAnalyse ;
   rdfs:range  :Problematique .
 
 :inclutEchantillon a owl:ObjectProperty ;
-  rdfs:label "inclutEchantillon" ;
+  rdfs:label "inclut échantillon" ;
   rdfs:domain :DemandeAnalyse ;
   rdfs:range  :Echantillon .
 
 :aPourEtat a owl:ObjectProperty ;
-  rdfs:label "aPourEtat" ;
+  rdfs:label "a pour état" ;
   rdfs:domain :Echantillon ;
   rdfs:range  :EtatEchantillon .
 
 :aPourMateriau a owl:ObjectProperty ;
-  rdfs:label "aPourMateriau" ;
+  rdfs:label "a pour matériau" ;
   rdfs:domain :Echantillon ;
   rdfs:range  :Materiau .
 
-:associeLot a owl:ObjectProperty ;
-  rdfs:label "associeLot" ;
-  rdfs:comment "Lien souple pour gérer la variabilité (lot côté demande ou côté échantillon)." ;
+:appartientAuLot a owl:ObjectProperty ;
+  rdfs:label "appartient au lot" ;
   rdfs:domain :DemandeAnalyse ;
   rdfs:range  :Lot .
 
 :aPourPlanAnalyse a owl:ObjectProperty ;
-  rdfs:label "aPourPlanAnalyse" ;
+  rdfs:label "a pour plan d'analyse" ;
   rdfs:domain :DemandeAnalyse ;
   rdfs:range  :PlanAnalyse .
 
 :inclutAnalyse a owl:ObjectProperty ;
-  rdfs:label "inclutAnalyse" ;
+  rdfs:label "inclut analyse" ;
   rdfs:domain :PlanAnalyse ;
   rdfs:range  :AnalyseDemandee .
 
 :utiliseTechnique a owl:ObjectProperty ;
-  rdfs:label "utiliseTechnique" ;
+  rdfs:label "utilise technique" ;
   rdfs:domain :AnalyseDemandee ;
   rdfs:range  :TechniqueAnalyse .
 
 :cibleEchantillon a owl:ObjectProperty ;
-  rdfs:label "cibleEchantillon" ;
+  rdfs:label "cible échantillon" ;
   rdfs:domain :AnalyseDemandee ;
   rdfs:range  :Echantillon .
 
 :cibleZone a owl:ObjectProperty ;
-  rdfs:label "cibleZone" ;
+  rdfs:label "cible zone" ;
   rdfs:domain :AnalyseDemandee ;
   rdfs:range  :ZoneAnalyse .
 
 :attendLivrable a owl:ObjectProperty ;
-  rdfs:label "attendLivrable" ;
+  rdfs:label "attend livrable" ;
   rdfs:domain :DemandeAnalyse ;
   rdfs:range  :LivrableAttendu .
 
 :aPourReferenceCommerciale a owl:ObjectProperty ;
-  rdfs:label "aPourReferenceCommerciale" ;
+  rdfs:label "a pour référence commerciale" ;
   rdfs:domain :DocumentClient ;
   rdfs:range  :ReferenceCommerciale .
 
 :aPourExpedition a owl:ObjectProperty ;
-  rdfs:label "aPourExpedition" ;
+  rdfs:label "a pour expédition" ;
   rdfs:domain :DocumentClient ;
   rdfs:range  :Expedition .
 
+
 #################################################################
-# Datatype Properties — Champs clés (focus problématique)
+# Datatype Properties — Champs clés
 #################################################################
 
 :typeDocument a owl:DatatypeProperty ;
-  rdfs:label "typeDocument" ;
+  rdfs:label "type de document" ;
   rdfs:domain :DocumentClient ;
   rdfs:range xsd:string .
 
 :numeroDocument a owl:DatatypeProperty ;
-  rdfs:label "numeroDocument" ;
+  rdfs:label "numéro de document" ;
   rdfs:domain :DocumentClient ;
   rdfs:range xsd:string .
 
 :dateDocument a owl:DatatypeProperty ;
-  rdfs:label "dateDocument" ;
+  rdfs:label "date du document" ;
   rdfs:domain :DocumentClient ;
-  rdfs:range xsd:string .
-
-:descriptionDemande a owl:DatatypeProperty ;
-  rdfs:label "descriptionDemande" ;
-  rdfs:domain :DemandeAnalyse ;
-  rdfs:range xsd:string .
+  rdfs:range xsd:date .
 
 :texteProblematique a owl:DatatypeProperty ;
-  rdfs:label "texteProblematique" ;
+  rdfs:label "texte de la problématique" ;
   rdfs:domain :Problematique ;
   rdfs:range xsd:string .
 
+:descriptionDemande a owl:DatatypeProperty ;
+  rdfs:label "description de la demande" ;
+  rdfs:domain :DemandeAnalyse ;
+  rdfs:range xsd:string .
+
 :nomEchantillon a owl:DatatypeProperty ;
-  rdfs:label "nomEchantillon" ;
+  rdfs:label "nom de l'échantillon" ;
   rdfs:domain :Echantillon ;
   rdfs:range xsd:string .
 
 :quantiteEchantillon a owl:DatatypeProperty ;
-  rdfs:label "quantiteEchantillon" ;
+  rdfs:label "quantité d'échantillons" ;
   rdfs:domain :Echantillon ;
   rdfs:range xsd:int .
 
-:nombreRepetitions a owl:DatatypeProperty ;
-  rdfs:label "nombreRepetitions" ;
-  rdfs:domain :AnalyseDemandee ;
-  rdfs:range xsd:int .
+
+
 
 :commentairePlan a owl:DatatypeProperty ;
-  rdfs:label "commentairePlan" ;
+  rdfs:label "commentaire du plan" ;
   rdfs:domain :PlanAnalyse ;
   rdfs:range xsd:string .
 
 :descriptionLivrable a owl:DatatypeProperty ;
-  rdfs:label "descriptionLivrable" ;
+  rdfs:label "description du livrable" ;
   rdfs:domain :LivrableAttendu ;
   rdfs:range xsd:string .
 
 :numeroDevis a owl:DatatypeProperty ;
-  rdfs:label "numeroDevis" ;
+  rdfs:label "numéro de devis" ;
   rdfs:domain :ReferenceCommerciale ;
   rdfs:range xsd:string .
 
 :numeroCommande a owl:DatatypeProperty ;
-  rdfs:label "numeroCommande" ;
+  rdfs:label "numéro de commande" ;
   rdfs:domain :ReferenceCommerciale ;
   rdfs:range xsd:string .
 
 :referenceInterne a owl:DatatypeProperty ;
-  rdfs:label "referenceInterne" ;
+  rdfs:label "référence interne" ;
   rdfs:domain :ReferenceCommerciale ;
+  rdfs:range xsd:string .
+
+:poidsColisGrammes a owl:DatatypeProperty ;
+  rdfs:label "poids du colis (g)" ;
+  rdfs:domain :Expedition ;
+  rdfs:range xsd:decimal .
+
+:typeEmballage a owl:DatatypeProperty ;
+  rdfs:label "type d'emballage" ;
+  rdfs:domain :Expedition ;
   rdfs:range xsd:string .
